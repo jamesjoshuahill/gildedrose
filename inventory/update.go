@@ -15,19 +15,16 @@ func (i *inventory) Update() {
 				item.quality++
 			}
 		case backstagePasses:
-			if item.quality < 50 {
-				item.quality++
+			item.quality++
 
-				if item.sellIn < 11 {
-					if item.quality < 50 {
-						item.quality++
-					}
-				}
-				if item.sellIn < 6 {
-					if item.quality < 50 {
-						item.quality++
-					}
-				}
+			if item.sellIn < 11 {
+				item.quality++
+			}
+			if item.sellIn < 6 {
+				item.quality++
+			}
+			if item.quality > 50 {
+				item.quality = 50
 			}
 		case sulfuras:
 			continue
