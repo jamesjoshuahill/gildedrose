@@ -1,10 +1,12 @@
 package inventory
 
+// Item defines an item in the inventory. Do not touch!
 type Item struct {
 	name            string
 	sellIn, quality int
 }
 
+// items lists the items in the inventory. Do not touch!
 var items = []Item{
 	{name: "+5 Dexterity Vest", sellIn: 10, quality: 20},
 	{name: agedBrie, sellIn: 2, quality: 0},

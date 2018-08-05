@@ -6,6 +6,7 @@ const (
 	sulfuras        = "Sulfuras, Hand of Ragnaros"
 )
 
+// Update changes the items in the inventory to reflect the passing of one day.
 func (i *inventory) Update() {
 	for n := 0; n < len(i.items); n++ {
 
