@@ -13,13 +13,17 @@ func (i *inventory) Update() {
 		case agedBrie:
 			item.quality++
 		case backstagePasses:
-			item.quality++
-
-			if item.sellIn < 11 {
+			if item.sellIn > 10 {
 				item.quality++
 			}
-			if item.sellIn < 6 {
-				item.quality++
+			if item.sellIn <= 10 && item.sellIn > 5 {
+				item.quality += 2
+			}
+			if item.sellIn <= 5 && item.sellIn > 0 {
+				item.quality += 3
+			}
+			if item.sellIn <= 0 {
+				item.quality = 0
 			}
 		case sulfuras:
 			continue
@@ -33,8 +37,6 @@ func (i *inventory) Update() {
 			switch item.name {
 			case agedBrie:
 				item.quality++
-			case backstagePasses:
-				item.quality = 0
 			default:
 				item.quality--
 			}
