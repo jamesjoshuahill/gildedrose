@@ -9,41 +9,47 @@ const (
 // Update changes the items in the inventory to reflect the passing of one day.
 func (i *inventory) Update() {
 	for index, item := range i.items {
-		var qualityChange int
-
-		switch item.name {
-		case agedBrie:
-			if item.sellIn < 1 {
-				qualityChange = 2
-			} else {
-				qualityChange = 1
-			}
-		case backstagePasses:
-			if item.sellIn > 10 {
-				qualityChange = 1
-			}
-			if item.sellIn <= 10 && item.sellIn > 5 {
-				qualityChange = 2
-			}
-			if item.sellIn <= 5 && item.sellIn > 0 {
-				qualityChange = 3
-			}
-			if item.sellIn <= 0 {
-				qualityChange = -item.quality
-			}
-		case sulfuras:
+		if item.name == sulfuras {
 			continue
-		default:
-			if item.sellIn < 1 {
-				qualityChange = -2
-			} else {
-				qualityChange = -1
-			}
 		}
 
 		i.items[index].sellIn--
-		i.items[index].quality = normaliseQuality(item.quality, qualityChange)
+		i.items[index].quality = updateQuality(item)
 	}
+}
+
+func updateQuality(item Item) int {
+	var change int
+
+	switch item.name {
+	case agedBrie:
+		if item.sellIn < 1 {
+			change = 2
+		} else {
+			change = 1
+		}
+	case backstagePasses:
+		if item.sellIn > 10 {
+			change = 1
+		}
+		if item.sellIn <= 10 && item.sellIn > 5 {
+			change = 2
+		}
+		if item.sellIn <= 5 && item.sellIn > 0 {
+			change = 3
+		}
+		if item.sellIn <= 0 {
+			change = -item.quality
+		}
+	default:
+		if item.sellIn < 1 {
+			change = -2
+		} else {
+			change = -1
+		}
+	}
+
+	return normaliseQuality(item.quality, change)
 }
 
 func normaliseQuality(current int, change int) int {
