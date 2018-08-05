@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"os"
+	"strconv"
+)
 
 type Item struct {
 	name            string
@@ -12,14 +17,37 @@ var items = []Item{
 	Item{"Aged Brie", 2, 0},
 	Item{"Elixir of the Mongoose", 5, 7},
 	Item{"Sulfuras, Hand of Ragnaros", 0, 80},
+	Item{"Sulfuras, Hand of Ragnaros", -1, 80},
 	Item{"Backstage passes to a TAFKAL80ETC concert", 15, 20},
+	Item{"Backstage passes to a TAFKAL80ETC concert", 10, 49},
+	Item{"Backstage passes to a TAFKAL80ETC concert", 5, 49},
 	Item{"Conjured Mana Cake", 3, 6},
 }
 
 func main() {
-	fmt.Println("OMGHAI!")
-	// fmt.Print(items)
-	GildedRose()
+	daysArg := os.Args[1]
+	if daysArg == "" {
+		daysArg = "0"
+	}
+
+	days, err := strconv.Atoi(daysArg)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	for day := 0; day <= days; day++ {
+		if day == 0 {
+			fmt.Println("OMGHAI!")
+		} else {
+			fmt.Println()
+		}
+		fmt.Printf("-------- day %d --------\n", day)
+		fmt.Printf("name, sellIn, quality\n")
+		for _, item := range items {
+			fmt.Printf("%s, %d, %d\n", item.name, item.sellIn, item.quality)
+		}
+		GildedRose()
+	}
 }
 
 func GildedRose() {
@@ -71,5 +99,4 @@ func GildedRose() {
 			}
 		}
 	}
-
 }
