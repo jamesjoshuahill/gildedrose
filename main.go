@@ -20,6 +20,8 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	i := inventory.New()
+
 	for day := 0; day <= days; day++ {
 		if day == 0 {
 			fmt.Println("OMGHAI!")
@@ -28,7 +30,7 @@ func main() {
 		}
 		fmt.Printf("-------- day %d --------\n", day)
 		fmt.Printf("name, sellIn, quality\n")
-		inventory.Print()
-		inventory.Update()
+		fmt.Print(i.List())
+		i.Update()
 	}
 }

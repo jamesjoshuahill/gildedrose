@@ -22,13 +22,20 @@ var items = []Item{
 	{"Conjured Mana Cake", 3, 6},
 }
 
-func Print() {
-	for _, item := range items {
-		fmt.Printf("%s, %d, %d\n", item.name, item.sellIn, item.quality)
-	}
+type inventory struct{}
+
+func New() *inventory {
+	return new(inventory)
 }
 
-func Update() {
+func (*inventory) List() (l string) {
+	for _, item := range items {
+		l += fmt.Sprintf("%s, %d, %d\n", item.name, item.sellIn, item.quality)
+	}
+	return
+}
+
+func (*inventory) Update() {
 	for i := 0; i < len(items); i++ {
 
 		if items[i].name != agedBrie && items[i].name != backstagePasses {
