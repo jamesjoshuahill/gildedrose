@@ -8,49 +8,52 @@ const (
 
 // Update changes the items in the inventory to reflect the passing of one day.
 func (i *inventory) Update() {
-	for n := 0; n < len(i.items); n++ {
-		if i.items[n].name == sulfuras {
+	for index, item := range i.items {
+		if item.name == sulfuras {
 			continue
 		}
 
-		if i.items[n].name != agedBrie && i.items[n].name != backstagePasses {
-			if i.items[n].quality > 0 {
-				i.items[n].quality = i.items[n].quality - 1
+		if item.name != agedBrie && item.name != backstagePasses {
+			if item.quality > 0 {
+				item.quality--
 			}
 		} else {
-			if i.items[n].quality < 50 {
-				i.items[n].quality = i.items[n].quality + 1
-				if i.items[n].name == backstagePasses {
-					if i.items[n].sellIn < 11 {
-						if i.items[n].quality < 50 {
-							i.items[n].quality = i.items[n].quality + 1
+			if item.quality < 50 {
+				item.quality++
+
+				if item.name == backstagePasses {
+					if item.sellIn < 11 {
+						if item.quality < 50 {
+							item.quality++
 						}
 					}
-					if i.items[n].sellIn < 6 {
-						if i.items[n].quality < 50 {
-							i.items[n].quality = i.items[n].quality + 1
+					if item.sellIn < 6 {
+						if item.quality < 50 {
+							item.quality++
 						}
 					}
 				}
 			}
 		}
 
-		i.items[n].sellIn -= 1
+		item.sellIn--
 
-		if i.items[n].sellIn < 0 {
-			if i.items[n].name != agedBrie {
-				if i.items[n].name != backstagePasses {
-					if i.items[n].quality > 0 {
-						i.items[n].quality = i.items[n].quality - 1
+		if item.sellIn < 0 {
+			if item.name != agedBrie {
+				if item.name != backstagePasses {
+					if item.quality > 0 {
+						item.quality--
 					}
 				} else {
-					i.items[n].quality -= i.items[n].quality
+					item.quality -= item.quality
 				}
 			} else {
-				if i.items[n].quality < 50 {
-					i.items[n].quality = i.items[n].quality + 1
+				if item.quality < 50 {
+					item.quality++
 				}
 			}
 		}
+
+		i.items[index] = item
 	}
 }
