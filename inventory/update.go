@@ -11,9 +11,7 @@ func (i *inventory) Update() {
 	for index, item := range i.items {
 		switch item.name {
 		case agedBrie:
-			if item.quality < 50 {
-				item.quality++
-			}
+			item.quality++
 		case backstagePasses:
 			item.quality++
 
@@ -23,15 +21,10 @@ func (i *inventory) Update() {
 			if item.sellIn < 6 {
 				item.quality++
 			}
-			if item.quality > 50 {
-				item.quality = 50
-			}
 		case sulfuras:
 			continue
 		default:
-			if item.quality > 0 {
-				item.quality--
-			}
+			item.quality--
 		}
 
 		item.sellIn--
@@ -39,16 +32,19 @@ func (i *inventory) Update() {
 		if item.sellIn < 0 {
 			switch item.name {
 			case agedBrie:
-				if item.quality < 50 {
-					item.quality++
-				}
+				item.quality++
 			case backstagePasses:
 				item.quality = 0
 			default:
-				if item.quality > 0 {
-					item.quality--
-				}
+				item.quality--
 			}
+		}
+
+		if item.quality < 0 {
+			item.quality = 0
+		}
+		if item.quality > 50 {
+			item.quality = 50
 		}
 
 		i.items[index] = item
