@@ -1,8 +1,9 @@
 package inventory
 
 const (
-	agedBrie = "Aged Brie"
-	sulfuras = "Sulfuras, Hand of Ragnaros"
+	agedBrie        = "Aged Brie"
+	backstagePasses = "Backstage passes to a TAFKAL80ETC concert"
+	sulfuras        = "Sulfuras, Hand of Ragnaros"
 )
 
 type Item interface {
@@ -30,7 +31,15 @@ func (m MagicItem) Quality() int {
 }
 
 func (m MagicItem) Update() Item {
-	return ItemBuilder{}.Build(m.Name(), m.SellIn()-1, updateQuality(m))
+	var change int
+	if m.sellIn < 1 {
+		change = -2
+	} else {
+		change = -1
+	}
+	updatedQuality := normaliseQuality(m.quality, change)
+
+	return MagicItem{name: m.name, sellIn: m.sellIn - 1, quality: updatedQuality}
 }
 
 type Sulfuras struct {
@@ -81,32 +90,39 @@ func (a AgedBrie) Update() Item {
 	return AgedBrie{sellIn: a.sellIn - 1, quality: updatedQuality}
 }
 
-func updateQuality(item MagicItem) int {
+type BackstagePasses struct {
+	sellIn, quality int
+}
+
+func (b BackstagePasses) Name() string {
+	return backstagePasses
+}
+
+func (b BackstagePasses) SellIn() int {
+	return b.sellIn
+}
+
+func (b BackstagePasses) Quality() int {
+	return b.quality
+}
+
+func (b BackstagePasses) Update() Item {
 	var change int
-
-	switch item.Name() {
-	case "Backstage passes to a TAFKAL80ETC concert":
-		if item.SellIn() > 10 {
-			change = 1
-		}
-		if item.SellIn() <= 10 && item.SellIn() > 5 {
-			change = 2
-		}
-		if item.SellIn() <= 5 && item.SellIn() > 0 {
-			change = 3
-		}
-		if item.SellIn() <= 0 {
-			change = -item.Quality()
-		}
-	default:
-		if item.SellIn() < 1 {
-			change = -2
-		} else {
-			change = -1
-		}
+	if b.sellIn > 10 {
+		change = 1
 	}
+	if b.sellIn <= 10 && b.sellIn > 5 {
+		change = 2
+	}
+	if b.sellIn <= 5 && b.sellIn > 0 {
+		change = 3
+	}
+	if b.sellIn <= 0 {
+		change = -b.quality
+	}
+	updatedQuality := normaliseQuality(b.quality, change)
 
-	return normaliseQuality(item.Quality(), change)
+	return BackstagePasses{sellIn: b.sellIn - 1, quality: updatedQuality}
 }
 
 func normaliseQuality(current int, change int) int {
