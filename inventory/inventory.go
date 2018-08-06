@@ -1,30 +1,22 @@
 package inventory
 
 type inventory struct {
-	items []WrappedItem
+	list []Item
 }
 
 // New returns a new inventory with a list of items.
-func New(items []Item) *inventory {
-	var wrapped []WrappedItem
-	for _, item := range items {
-		wrapped = append(wrapped, WrappedItem{item})
-	}
-	return &inventory{items: wrapped}
+func New(list []Item) *inventory {
+	return &inventory{list: list}
 }
 
-// List returns a string with a line for each item including it's name, sell in, and quality.
+// List returns the items in the inventory.
 func (i *inventory) List() []Item {
-	var unwrapped []Item
-	for _, wrapped := range i.items {
-		unwrapped = append(unwrapped, wrapped.Item)
-	}
-	return unwrapped
+	return i.list
 }
 
-// Update changes the items in the inventory to reflect the passing of one day.
+// Update changes the list of items in the inventory to reflect the passing of one day.
 func (i *inventory) Update() {
-	for index, item := range i.items {
-		i.items[index] = item.Update()
+	for index, item := range i.list {
+		i.list[index] = item.Update()
 	}
 }

@@ -9,8 +9,14 @@ import (
 	"github.com/jamesjoshuahill/gildedrose/inventory"
 )
 
+// Item defines an item in the inventory. Do not touch!
+type Item struct {
+	Name            string
+	SellIn, Quality int
+}
+
 // items is the list of items in the inventory. Do not touch!
-var items = []inventory.Item{
+var items = []Item{
 	{Name: "+5 Dexterity Vest", SellIn: 10, Quality: 20},
 	{Name: "Aged Brie", SellIn: 2, Quality: 0},
 	{Name: "Elixir of the Mongoose", SellIn: 5, Quality: 7},
@@ -33,7 +39,15 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	i := inventory.New(items)
+	var list []inventory.Item
+	for _, item := range items {
+		list = append(list, inventory.Item{
+			Name:    item.Name,
+			SellIn:  item.SellIn,
+			Quality: item.Quality,
+		})
+	}
+	i := inventory.New(list)
 
 	for day := 0; day <= days; day++ {
 		if day == 0 {
