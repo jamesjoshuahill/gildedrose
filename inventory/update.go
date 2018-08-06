@@ -18,7 +18,7 @@ func (i *inventory) Update() {
 	}
 }
 
-func updateQuality(item Item) int {
+func updateQuality(item WrappedItem) int {
 	var change int
 
 	switch item.Name {
