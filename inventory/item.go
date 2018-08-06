@@ -1,5 +1,7 @@
 package inventory
 
+const sulfuras = "Sulfuras, Hand of Ragnaros"
+
 type Item interface {
 	Name() string
 	SellIn() int
@@ -25,11 +27,27 @@ func (m MagicItem) Quality() int {
 }
 
 func (m MagicItem) Update() Item {
-	if m.Name() == "Sulfuras, Hand of Ragnaros" {
-		return m
-	}
-
 	return ItemBuilder{}.Build(m.Name(), m.SellIn()-1, updateQuality(m))
+}
+
+type Sulfuras struct {
+	sellIn, quality int
+}
+
+func (s Sulfuras) Name() string {
+	return sulfuras
+}
+
+func (s Sulfuras) SellIn() int {
+	return s.sellIn
+}
+
+func (s Sulfuras) Quality() int {
+	return s.quality
+}
+
+func (s Sulfuras) Update() Item {
+	return s
 }
 
 func updateQuality(item MagicItem) int {
