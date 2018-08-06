@@ -1,55 +1,55 @@
 package inventory
 
 const (
-	agedBrie        = "Aged Brie"
-	backstagePasses = "Backstage passes to a TAFKAL80ETC concert"
-	sulfuras        = "Sulfuras, Hand of Ragnaros"
+	AgedBrie        = "Aged Brie"
+	BackstagePasses = "Backstage passes to a TAFKAL80ETC concert"
+	Sulfuras        = "Sulfuras, Hand of Ragnaros"
 )
 
 // Update changes the items in the inventory to reflect the passing of one day.
 func (i *inventory) Update() {
 	for index, item := range i.items {
-		if item.name == sulfuras {
+		if item.Name == Sulfuras {
 			continue
 		}
 
-		i.items[index].sellIn--
-		i.items[index].quality = updateQuality(item)
+		i.items[index].SellIn--
+		i.items[index].Quality = updateQuality(item)
 	}
 }
 
 func updateQuality(item Item) int {
 	var change int
 
-	switch item.name {
-	case agedBrie:
-		if item.sellIn < 1 {
+	switch item.Name {
+	case AgedBrie:
+		if item.SellIn < 1 {
 			change = 2
 		} else {
 			change = 1
 		}
-	case backstagePasses:
-		if item.sellIn > 10 {
+	case BackstagePasses:
+		if item.SellIn > 10 {
 			change = 1
 		}
-		if item.sellIn <= 10 && item.sellIn > 5 {
+		if item.SellIn <= 10 && item.SellIn > 5 {
 			change = 2
 		}
-		if item.sellIn <= 5 && item.sellIn > 0 {
+		if item.SellIn <= 5 && item.SellIn > 0 {
 			change = 3
 		}
-		if item.sellIn <= 0 {
-			change = -item.quality
+		if item.SellIn <= 0 {
+			change = -item.Quality
 		}
 	default:
-		if item.sellIn < 1 {
+		if item.SellIn < 1 {
 			change = -2
 		} else {
 			change = -1
 		}
 	}
 
-	return normaliseQuality(item.quality, change)
+	return normaliseQuality(item.Quality, change)
 }
 
 func normaliseQuality(current int, change int) int {

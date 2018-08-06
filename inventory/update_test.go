@@ -1,6 +1,7 @@
-package inventory
+package inventory_test
 
 import (
+	"github.com/jamesjoshuahill/gildedrose/inventory"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -8,29 +9,29 @@ import (
 var _ = Describe("Update", func() {
 	Context("when there is a standard item", func() {
 		It("reduces sell in by one", func() {
-			i := inventory{items: []Item{{sellIn: 1}}}
+			i := inventory.New([]inventory.Item{{SellIn: 1}})
 
 			i.Update()
 
-			Expect(i.items[0].sellIn).To(Equal(0))
+			Expect(i.List()[0].SellIn).To(Equal(0))
 		})
 	})
 
 	Context("when the item is Sulfuras", func() {
 		It("does not reduce sell in", func() {
-			i := inventory{items: []Item{{name: "Sulfuras, Hand of Ragnaros", sellIn: 1}}}
+			i := inventory.New([]inventory.Item{{Name: "Sulfuras, Hand of Ragnaros", SellIn: 1}})
 
 			i.Update()
 
-			Expect(i.items[0].sellIn).To(Equal(1))
+			Expect(i.List()[0].SellIn).To(Equal(1))
 		})
 
 		It("does not reduce in quality", func() {
-			i := inventory{items: []Item{{name: "Sulfuras, Hand of Ragnaros", quality: 80}}}
+			i := inventory.New([]inventory.Item{{Name: "Sulfuras, Hand of Ragnaros", Quality: 80}})
 
 			i.Update()
 
-			Expect(i.items[0].quality).To(Equal(80))
+			Expect(i.List()[0].Quality).To(Equal(80))
 		})
 	})
 })
