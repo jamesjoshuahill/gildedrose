@@ -5,6 +5,14 @@ type Item struct {
 	SellIn, Quality int
 }
 
+func NewItem(name string, sellIn, quality int) Item {
+	return Item{
+		Name:    name,
+		SellIn:  sellIn,
+		Quality: quality,
+	}
+}
+
 func (w Item) Update() Item {
 	if w.Name == "Sulfuras, Hand of Ragnaros" {
 		return w

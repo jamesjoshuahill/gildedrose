@@ -41,11 +41,7 @@ func main() {
 
 	var list []inventory.Item
 	for _, item := range items {
-		list = append(list, inventory.Item{
-			Name:    item.Name,
-			SellIn:  item.SellIn,
-			Quality: item.Quality,
-		})
+		list = append(list, inventory.NewItem(item.Name, item.SellIn, item.Quality))
 	}
 	i := inventory.New(list)
 
