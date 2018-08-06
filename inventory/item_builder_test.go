@@ -22,10 +22,20 @@ var _ = Describe("ItemBuilder", func() {
 
 		item := b.Build("Sulfuras, Hand of Ragnaros", 10, 80)
 
+		Expect(item).To(BeAssignableToTypeOf(inventory.Sulfuras{}))
 		Expect(item.Name()).To(Equal("Sulfuras, Hand of Ragnaros"))
 		Expect(item.SellIn()).To(Equal(10))
 		Expect(item.Quality()).To(Equal(80))
-		updated := item.Update()
-		Expect(item).To(Equal(updated))
+	})
+
+	It("builds AgedBrie", func() {
+		b := inventory.ItemBuilder{}
+
+		item := b.Build("Aged Brie", 2, 0)
+
+		Expect(item).To(BeAssignableToTypeOf(inventory.AgedBrie{}))
+		Expect(item.Name()).To(Equal("Aged Brie"))
+		Expect(item.SellIn()).To(Equal(2))
+		Expect(item.Quality()).To(Equal(0))
 	})
 })

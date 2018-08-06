@@ -1,6 +1,9 @@
 package inventory
 
-const sulfuras = "Sulfuras, Hand of Ragnaros"
+const (
+	agedBrie = "Aged Brie"
+	sulfuras = "Sulfuras, Hand of Ragnaros"
+)
 
 type Item interface {
 	Name() string
@@ -50,16 +53,38 @@ func (s Sulfuras) Update() Item {
 	return s
 }
 
+type AgedBrie struct {
+	sellIn, quality int
+}
+
+func (a AgedBrie) Name() string {
+	return agedBrie
+}
+
+func (a AgedBrie) SellIn() int {
+	return a.sellIn
+}
+
+func (a AgedBrie) Quality() int {
+	return a.quality
+}
+
+func (a AgedBrie) Update() Item {
+	var change int
+	if a.sellIn < 1 {
+		change = 2
+	} else {
+		change = 1
+	}
+	updatedQuality := normaliseQuality(a.quality, change)
+
+	return AgedBrie{sellIn: a.sellIn - 1, quality: updatedQuality}
+}
+
 func updateQuality(item MagicItem) int {
 	var change int
 
 	switch item.Name() {
-	case "Aged Brie":
-		if item.SellIn() < 1 {
-			change = 2
-		} else {
-			change = 1
-		}
 	case "Backstage passes to a TAFKAL80ETC concert":
 		if item.SellIn() > 10 {
 			change = 1
