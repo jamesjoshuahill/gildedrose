@@ -13,9 +13,22 @@ type Item interface {
 	Update()
 }
 
+type SellIn struct {
+	value int
+}
+
+func NewSellIn(value int) *SellIn {
+	return &SellIn{value: value}
+}
+
+func (s *SellIn) Tick() {
+	s.value = s.value - 1
+}
+
 type MagicItem struct {
-	name            string
-	sellIn, quality int
+	name    string
+	sellIn  *SellIn
+	quality int
 }
 
 func (m MagicItem) Name() string {
@@ -23,7 +36,7 @@ func (m MagicItem) Name() string {
 }
 
 func (m MagicItem) SellIn() int {
-	return m.sellIn
+	return m.sellIn.value
 }
 
 func (m MagicItem) Quality() int {
@@ -32,18 +45,19 @@ func (m MagicItem) Quality() int {
 
 func (m *MagicItem) Update() {
 	var change int
-	if m.sellIn < 1 {
+	if m.sellIn.value < 1 {
 		change = -2
 	} else {
 		change = -1
 	}
 
-	m.sellIn = m.sellIn - 1
+	m.sellIn.Tick()
 	m.quality = normaliseQuality(m.quality, change)
 }
 
 type Sulfuras struct {
-	sellIn, quality int
+	sellIn  *SellIn
+	quality int
 }
 
 func (s Sulfuras) Name() string {
@@ -51,7 +65,7 @@ func (s Sulfuras) Name() string {
 }
 
 func (s Sulfuras) SellIn() int {
-	return s.sellIn
+	return s.sellIn.value
 }
 
 func (s Sulfuras) Quality() int {
@@ -63,7 +77,8 @@ func (s Sulfuras) Update() {
 }
 
 type AgedBrie struct {
-	sellIn, quality int
+	sellIn  *SellIn
+	quality int
 }
 
 func (a AgedBrie) Name() string {
@@ -71,7 +86,7 @@ func (a AgedBrie) Name() string {
 }
 
 func (a AgedBrie) SellIn() int {
-	return a.sellIn
+	return a.sellIn.value
 }
 
 func (a AgedBrie) Quality() int {
@@ -80,18 +95,19 @@ func (a AgedBrie) Quality() int {
 
 func (a *AgedBrie) Update() {
 	var change int
-	if a.sellIn < 1 {
+	if a.sellIn.value < 1 {
 		change = 2
 	} else {
 		change = 1
 	}
 
-	a.sellIn = a.sellIn - 1
+	a.sellIn.Tick()
 	a.quality = normaliseQuality(a.quality, change)
 }
 
 type BackstagePasses struct {
-	sellIn, quality int
+	sellIn  *SellIn
+	quality int
 }
 
 func (b BackstagePasses) Name() string {
@@ -99,7 +115,7 @@ func (b BackstagePasses) Name() string {
 }
 
 func (b BackstagePasses) SellIn() int {
-	return b.sellIn
+	return b.sellIn.value
 }
 
 func (b BackstagePasses) Quality() int {
@@ -108,20 +124,20 @@ func (b BackstagePasses) Quality() int {
 
 func (b *BackstagePasses) Update() {
 	var change int
-	if b.sellIn > 10 {
+	if b.sellIn.value > 10 {
 		change = 1
 	}
-	if b.sellIn <= 10 && b.sellIn > 5 {
+	if b.sellIn.value <= 10 && b.sellIn.value > 5 {
 		change = 2
 	}
-	if b.sellIn <= 5 && b.sellIn > 0 {
+	if b.sellIn.value <= 5 && b.sellIn.value > 0 {
 		change = 3
 	}
-	if b.sellIn <= 0 {
+	if b.sellIn.value <= 0 {
 		change = -b.quality
 	}
 
-	b.sellIn = b.sellIn - 1
+	b.sellIn.Tick()
 	b.quality = normaliseQuality(b.quality, change)
 }
 
