@@ -9,13 +9,13 @@ import (
 var _ = Describe("Item", func() {
 	var builder inventory.ItemBuilder
 
-	Context("when a standard item is updated", func() {
+	Context("when a magic item is updated", func() {
 		It("reduces sell in by one", func() {
 			i := builder.Build("", 1, 0)
 
-			updated := i.Update()
+			i.Update()
 
-			Expect(updated.SellIn()).To(Equal(0))
+			Expect(i.SellIn()).To(Equal(0))
 		})
 	})
 
@@ -23,17 +23,17 @@ var _ = Describe("Item", func() {
 		It("does not reduce sell in", func() {
 			i := builder.Build("Sulfuras, Hand of Ragnaros", 1, 80)
 
-			updated := i.Update()
+			i.Update()
 
-			Expect(updated.SellIn()).To(Equal(1))
+			Expect(i.SellIn()).To(Equal(1))
 		})
 
 		It("does not reduce in quality", func() {
 			i := builder.Build("Sulfuras, Hand of Ragnaros", 1, 80)
 
-			updated := i.Update()
+			i.Update()
 
-			Expect(updated.Quality()).To(Equal(80))
+			Expect(i.Quality()).To(Equal(80))
 		})
 	})
 })

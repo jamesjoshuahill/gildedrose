@@ -10,7 +10,7 @@ type Item interface {
 	Name() string
 	SellIn() int
 	Quality() int
-	Update() Item
+	Update()
 }
 
 type MagicItem struct {
@@ -30,16 +30,16 @@ func (m MagicItem) Quality() int {
 	return m.quality
 }
 
-func (m MagicItem) Update() Item {
+func (m *MagicItem) Update() {
 	var change int
 	if m.sellIn < 1 {
 		change = -2
 	} else {
 		change = -1
 	}
-	updatedQuality := normaliseQuality(m.quality, change)
 
-	return MagicItem{name: m.name, sellIn: m.sellIn - 1, quality: updatedQuality}
+	m.sellIn = m.sellIn - 1
+	m.quality = normaliseQuality(m.quality, change)
 }
 
 type Sulfuras struct {
@@ -58,8 +58,8 @@ func (s Sulfuras) Quality() int {
 	return s.quality
 }
 
-func (s Sulfuras) Update() Item {
-	return s
+func (s Sulfuras) Update() {
+	return
 }
 
 type AgedBrie struct {
@@ -78,16 +78,16 @@ func (a AgedBrie) Quality() int {
 	return a.quality
 }
 
-func (a AgedBrie) Update() Item {
+func (a *AgedBrie) Update() {
 	var change int
 	if a.sellIn < 1 {
 		change = 2
 	} else {
 		change = 1
 	}
-	updatedQuality := normaliseQuality(a.quality, change)
 
-	return AgedBrie{sellIn: a.sellIn - 1, quality: updatedQuality}
+	a.sellIn = a.sellIn - 1
+	a.quality = normaliseQuality(a.quality, change)
 }
 
 type BackstagePasses struct {
@@ -106,7 +106,7 @@ func (b BackstagePasses) Quality() int {
 	return b.quality
 }
 
-func (b BackstagePasses) Update() Item {
+func (b *BackstagePasses) Update() {
 	var change int
 	if b.sellIn > 10 {
 		change = 1
@@ -120,9 +120,9 @@ func (b BackstagePasses) Update() Item {
 	if b.sellIn <= 0 {
 		change = -b.quality
 	}
-	updatedQuality := normaliseQuality(b.quality, change)
 
-	return BackstagePasses{sellIn: b.sellIn - 1, quality: updatedQuality}
+	b.sellIn = b.sellIn - 1
+	b.quality = normaliseQuality(b.quality, change)
 }
 
 func normaliseQuality(current int, change int) int {

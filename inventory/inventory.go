@@ -16,7 +16,7 @@ func (i *inventory) List() []Item {
 
 // Update changes the list of items in the inventory to reflect the passing of one day.
 func (i *inventory) Update() {
-	for index, item := range i.list {
-		i.list[index] = item.Update()
+	for _, item := range i.list {
+		item.Update()
 	}
 }
