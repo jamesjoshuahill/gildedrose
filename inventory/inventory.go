@@ -22,10 +22,9 @@ func (i *inventory) List() []Item {
 	return unwrapped
 }
 
-type WrappedItem struct {
-	Item
-}
-
-func (w *WrappedItem) Update() {
-
+// Update changes the items in the inventory to reflect the passing of one day.
+func (i *inventory) Update() {
+	for index, item := range i.items {
+		i.items[index] = item.Update()
+	}
 }

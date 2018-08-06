@@ -6,15 +6,17 @@ const (
 	Sulfuras        = "Sulfuras, Hand of Ragnaros"
 )
 
-// Update changes the items in the inventory to reflect the passing of one day.
-func (i *inventory) Update() {
-	for index, item := range i.items {
-		if item.Name == Sulfuras {
-			continue
-		}
+type WrappedItem struct {
+	Item
+}
 
-		i.items[index].SellIn--
-		i.items[index].Quality = updateQuality(item)
+func (w WrappedItem) Update() WrappedItem {
+	if w.Name == Sulfuras {
+		return w
+	}
+
+	return WrappedItem{
+		Item{Name: w.Name, SellIn: w.SellIn - 1, Quality: updateQuality(w)},
 	}
 }
 

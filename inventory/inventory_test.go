@@ -15,4 +15,13 @@ var _ = Describe("Inventory", func() {
 
 		Expect(list).To(Equal(items))
 	})
+
+	It("updates items", func() {
+		items := []inventory.Item{{Name: "some-item", SellIn: 1, Quality: 1}}
+		i := inventory.New(items)
+
+		i.Update()
+
+		Expect(i.List()).To(ConsistOf(inventory.Item{Name: "some-item", SellIn: 0, Quality: 0}))
+	})
 })
