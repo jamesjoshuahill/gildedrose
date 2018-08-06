@@ -39,9 +39,10 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	var itemBuilder inventory.ItemBuilder
 	var list []inventory.Item
 	for _, item := range items {
-		list = append(list, inventory.NewItem(item.Name, item.SellIn, item.Quality))
+		list = append(list, itemBuilder.Build(item.Name, item.SellIn, item.Quality))
 	}
 	i := inventory.New(list)
 
@@ -54,7 +55,7 @@ func main() {
 		fmt.Printf("-------- day %d --------\n", day)
 		fmt.Printf("name, sellIn, quality\n")
 		for _, item := range i.List() {
-			fmt.Printf("%s, %d, %d\n", item.Name, item.SellIn, item.Quality)
+			fmt.Printf("%s, %d, %d\n", item.Name(), item.SellIn(), item.Quality())
 		}
 		i.Update()
 	}

@@ -1,62 +1,69 @@
 package inventory
 
-type Item struct {
-	Name            string
-	SellIn, Quality int
+type Item interface {
+	Name() string
+	SellIn() int
+	Quality() int
+	Update() Item
 }
 
-func NewItem(name string, sellIn, quality int) Item {
-	return Item{
-		Name:    name,
-		SellIn:  sellIn,
-		Quality: quality,
-	}
+type MagicItem struct {
+	name            string
+	sellIn, quality int
 }
 
-func (w Item) Update() Item {
-	if w.Name == "Sulfuras, Hand of Ragnaros" {
-		return w
-	}
-
-	return Item{
-		Name:    w.Name,
-		SellIn:  w.SellIn - 1,
-		Quality: updateQuality(w),
-	}
+func (m MagicItem) Name() string {
+	return m.name
 }
 
-func updateQuality(item Item) int {
+func (m MagicItem) SellIn() int {
+	return m.sellIn
+}
+
+func (m MagicItem) Quality() int {
+	return m.quality
+}
+
+func (m MagicItem) Update() Item {
+	if m.Name() == "Sulfuras, Hand of Ragnaros" {
+		return m
+	}
+
+	return ItemBuilder{}.Build(m.Name(), m.SellIn()-1, updateQuality(m))
+}
+
+func updateQuality(item MagicItem) int {
 	var change int
 
-	switch item.Name {
+	switch item.Name() {
 	case "Aged Brie":
-		if item.SellIn < 1 {
+		if item.SellIn() < 1 {
 			change = 2
 		} else {
 			change = 1
 		}
 	case "Backstage passes to a TAFKAL80ETC concert":
-		if item.SellIn > 10 {
+		if item.SellIn() > 10 {
 			change = 1
 		}
-		if item.SellIn <= 10 && item.SellIn > 5 {
+		if item.SellIn() <= 10 && item.SellIn() > 5 {
 			change = 2
 		}
-		if item.SellIn <= 5 && item.SellIn > 0 {
+		if item.SellIn() <= 5 && item.SellIn() > 0 {
 			change = 3
 		}
-		if item.SellIn <= 0 {
-			change = -item.Quality
+		if item.SellIn() <= 0 {
+			change = -item.Quality()
 		}
 	default:
-		if item.SellIn < 1 {
+		if item.SellIn() < 1 {
 			change = -2
 		} else {
 			change = -1
 		}
 	}
 
-	return normaliseQuality(item.Quality, change)
+	return normaliseQuality(item.Quality(), change)
 }
 
 func normaliseQuality(current int, change int) int {
