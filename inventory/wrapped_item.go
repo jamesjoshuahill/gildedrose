@@ -1,17 +1,11 @@
 package inventory
 
-const (
-	AgedBrie        = "Aged Brie"
-	BackstagePasses = "Backstage passes to a TAFKAL80ETC concert"
-	Sulfuras        = "Sulfuras, Hand of Ragnaros"
-)
-
 type WrappedItem struct {
 	Item
 }
 
 func (w WrappedItem) Update() WrappedItem {
-	if w.Name == Sulfuras {
+	if w.Name == "Sulfuras, Hand of Ragnaros" {
 		return w
 	}
 
@@ -24,13 +18,13 @@ func updateQuality(item WrappedItem) int {
 	var change int
 
 	switch item.Name {
-	case AgedBrie:
+	case "Aged Brie":
 		if item.SellIn < 1 {
 			change = 2
 		} else {
 			change = 1
 		}
-	case BackstagePasses:
+	case "Backstage passes to a TAFKAL80ETC concert":
 		if item.SellIn > 10 {
 			change = 1
 		}
