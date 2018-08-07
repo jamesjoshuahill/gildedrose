@@ -43,6 +43,15 @@ var _ = Describe("Item", func() {
 		Expect(item.Quality()).To(Equal(20))
 	})
 
+	It("creates Conjured items", func() {
+		item := inventory.NewItem("Conjured Mana Cake", 3, 6)
+
+		Expect(item).To(BeAssignableToTypeOf(&inventory.ConjuredItem{}))
+		Expect(item.Name()).To(Equal("Conjured Mana Cake"))
+		Expect(item.SellIn()).To(Equal(3))
+		Expect(item.Quality()).To(Equal(6))
+	})
+
 	Context("when a magic item is updated", func() {
 		It("reduces sell in by one", func() {
 			i := inventory.NewItem("", 1, 0)

@@ -1,5 +1,7 @@
 package inventory
 
+import "strings"
+
 const (
 	agedBrie        = "Aged Brie"
 	backstagePasses = "Backstage passes to a TAFKAL80ETC concert"
@@ -14,6 +16,10 @@ type Item interface {
 }
 
 func NewItem(name string, sellIn, quality int) Item {
+	if strings.HasPrefix(name, "Conjured") {
+		return &ConjuredItem{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
+	}
+
 	switch name {
 	case agedBrie:
 		return &AgedBrie{sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
