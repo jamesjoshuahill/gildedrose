@@ -10,7 +10,7 @@ The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/go
 output for 30 days. You can confirm there is no diff by comparing the output or running the test provided:
 
 ```bash
-$ diff <(go run gilded_rose.go 30) golden_master.txt
+$ diff <(go run main.go 30) golden_master.txt
 ```
 
 ## Get

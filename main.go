@@ -29,14 +29,14 @@ var items = []Item{
 }
 
 func main() {
-	daysArg := os.Args[1]
-	if daysArg == "" {
-		daysArg = "0"
+	daysArg := "0"
+	if len(os.Args) == 2 {
+		daysArg = os.Args[1]
 	}
 
 	days, err := strconv.Atoi(daysArg)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalf("error parsing days: %s\nusage: gildedrose [days]\n", err)
 	}
 
 	var itemBuilder inventory.ItemBuilder
