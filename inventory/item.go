@@ -22,7 +22,7 @@ func NewItem(name string, sellIn, quality int) Item {
 	case sulfuras:
 		return Sulfuras{sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
 	default:
-		return &MagicItem{
+		return &NormalItem{
 			name:    name,
 			sellIn:  NewSellIn(sellIn),
 			quality: NewQuality(quality),
@@ -71,34 +71,34 @@ func (q *Quality) Update(amount int) {
 	q.value = v
 }
 
-type MagicItem struct {
+type NormalItem struct {
 	name    string
 	sellIn  *SellIn
 	quality *Quality
 }
 
-func (m MagicItem) Name() string {
-	return m.name
+func (n NormalItem) Name() string {
+	return n.name
 }
 
-func (m MagicItem) SellIn() int {
-	return m.sellIn.Value()
+func (n NormalItem) SellIn() int {
+	return n.sellIn.Value()
 }
 
-func (m MagicItem) Quality() int {
-	return m.quality.Value()
+func (n NormalItem) Quality() int {
+	return n.quality.Value()
 }
 
-func (m *MagicItem) Update() {
+func (n *NormalItem) Update() {
 	var change int
-	if m.sellIn.Value() < 1 {
+	if n.sellIn.Value() < 1 {
 		change = -2
 	} else {
 		change = -1
 	}
 
-	m.quality.Update(change)
-	m.sellIn.Tick()
+	n.quality.Update(change)
+	n.sellIn.Tick()
 }
 
 type Sulfuras struct {

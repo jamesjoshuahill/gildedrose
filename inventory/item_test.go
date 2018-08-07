@@ -7,10 +7,10 @@ import (
 )
 
 var _ = Describe("Item", func() {
-	It("creates magic items", func() {
+	It("creates normal items", func() {
 		item := inventory.NewItem("some-name", 1, 2)
 
-		Expect(item).To(BeAssignableToTypeOf(&inventory.MagicItem{}))
+		Expect(item).To(BeAssignableToTypeOf(&inventory.NormalItem{}))
 		Expect(item.Name()).To(Equal("some-name"))
 		Expect(item.SellIn()).To(Equal(1))
 		Expect(item.Quality()).To(Equal(2))
