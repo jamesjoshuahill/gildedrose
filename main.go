@@ -41,10 +41,9 @@ func main() {
 		log.Fatalf("error parsing days: %s\nusage: gildedrose [days]\n", err)
 	}
 
-	var itemBuilder inventory.ItemBuilder
 	var list []inventory.Item
 	for _, item := range items {
-		list = append(list, itemBuilder.Build(item.Name, item.SellIn, item.Quality))
+		list = append(list, inventory.NewItem(item.Name, item.SellIn, item.Quality))
 	}
 	i := inventory.New(list)
 

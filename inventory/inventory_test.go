@@ -7,10 +7,8 @@ import (
 )
 
 var _ = Describe("Inventory", func() {
-	var builder inventory.ItemBuilder
-
 	It("lists items", func() {
-		items := []inventory.Item{builder.Build("some-item", 1, 1)}
+		items := []inventory.Item{inventory.NewItem("some-item", 1, 1)}
 		i := inventory.New(items)
 
 		list := i.List()
@@ -19,11 +17,11 @@ var _ = Describe("Inventory", func() {
 	})
 
 	It("updates items", func() {
-		items := []inventory.Item{builder.Build("some-item", 1, 1)}
+		items := []inventory.Item{inventory.NewItem("some-item", 1, 1)}
 		i := inventory.New(items)
 
 		i.Update()
 
-		Expect(i.List()).To(ConsistOf(builder.Build("some-item", 0, 0)))
+		Expect(i.List()).To(ConsistOf(inventory.NewItem("some-item", 0, 0)))
 	})
 })
