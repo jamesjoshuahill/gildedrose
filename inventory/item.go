@@ -38,6 +38,10 @@ func NewSellIn(value int) *SellIn {
 	return &SellIn{value: value}
 }
 
+func (s SellIn) Value() int {
+	return s.value
+}
+
 func (s *SellIn) Tick() {
 	s.value = s.value - 1
 }
@@ -48,6 +52,10 @@ type Quality struct {
 
 func NewQuality(value int) *Quality {
 	return &Quality{value: value}
+}
+
+func (q Quality) Value() int {
+	return q.value
 }
 
 func (q *Quality) Update(amount int) {
@@ -74,16 +82,16 @@ func (m MagicItem) Name() string {
 }
 
 func (m MagicItem) SellIn() int {
-	return m.sellIn.value
+	return m.sellIn.Value()
 }
 
 func (m MagicItem) Quality() int {
-	return m.quality.value
+	return m.quality.Value()
 }
 
 func (m *MagicItem) Update() {
 	var change int
-	if m.sellIn.value < 1 {
+	if m.sellIn.Value() < 1 {
 		change = -2
 	} else {
 		change = -1
@@ -103,11 +111,11 @@ func (s Sulfuras) Name() string {
 }
 
 func (s Sulfuras) SellIn() int {
-	return s.sellIn.value
+	return s.sellIn.Value()
 }
 
 func (s Sulfuras) Quality() int {
-	return s.quality.value
+	return s.quality.Value()
 }
 
 func (s Sulfuras) Update() {
@@ -124,16 +132,16 @@ func (a AgedBrie) Name() string {
 }
 
 func (a AgedBrie) SellIn() int {
-	return a.sellIn.value
+	return a.sellIn.Value()
 }
 
 func (a AgedBrie) Quality() int {
-	return a.quality.value
+	return a.quality.Value()
 }
 
 func (a *AgedBrie) Update() {
 	var change int
-	if a.sellIn.value < 1 {
+	if a.sellIn.Value() < 1 {
 		change = 2
 	} else {
 		change = 1
@@ -153,26 +161,26 @@ func (b BackstagePasses) Name() string {
 }
 
 func (b BackstagePasses) SellIn() int {
-	return b.sellIn.value
+	return b.sellIn.Value()
 }
 
 func (b BackstagePasses) Quality() int {
-	return b.quality.value
+	return b.quality.Value()
 }
 
 func (b *BackstagePasses) Update() {
 	var change int
-	if b.sellIn.value > 10 {
+	if b.sellIn.Value() > 10 {
 		change = 1
 	}
-	if b.sellIn.value <= 10 && b.sellIn.value > 5 {
+	if b.sellIn.Value() <= 10 && b.sellIn.Value() > 5 {
 		change = 2
 	}
-	if b.sellIn.value <= 5 && b.sellIn.value > 0 {
+	if b.sellIn.Value() <= 5 && b.sellIn.Value() > 0 {
 		change = 3
 	}
-	if b.sellIn.value <= 0 {
-		change = -b.quality.value
+	if b.sellIn.Value() <= 0 {
+		change = -b.quality.Value()
 	}
 
 	b.sellIn.Tick()
