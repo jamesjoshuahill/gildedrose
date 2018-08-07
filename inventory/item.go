@@ -97,8 +97,8 @@ func (m *MagicItem) Update() {
 		change = -1
 	}
 
-	m.sellIn.Tick()
 	m.quality.Update(change)
+	m.sellIn.Tick()
 }
 
 type Sulfuras struct {
@@ -147,8 +147,8 @@ func (a *AgedBrie) Update() {
 		change = 1
 	}
 
-	a.sellIn.Tick()
 	a.quality.Update(change)
+	a.sellIn.Tick()
 }
 
 type BackstagePasses struct {
@@ -169,20 +169,22 @@ func (b BackstagePasses) Quality() int {
 }
 
 func (b *BackstagePasses) Update() {
+	current := b.sellIn.Value()
+
 	var change int
-	if b.sellIn.Value() > 10 {
+	if current > 10 {
 		change = 1
 	}
-	if b.sellIn.Value() <= 10 && b.sellIn.Value() > 5 {
+	if current <= 10 && current > 5 {
 		change = 2
 	}
-	if b.sellIn.Value() <= 5 && b.sellIn.Value() > 0 {
+	if current <= 5 && current > 0 {
 		change = 3
 	}
-	if b.sellIn.Value() <= 0 {
+	if current <= 0 {
 		change = -b.quality.Value()
 	}
 
-	b.sellIn.Tick()
 	b.quality.Update(change)
+	b.sellIn.Tick()
 }
