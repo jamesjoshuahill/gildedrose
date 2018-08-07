@@ -17,6 +17,8 @@ $ diff <(go run main.go 30) golden_master.txt
 
 ```bash
 $ go get github.com/jamesjoshuahill/gildedrose
+$ brew install dep
+$ dep ensure
 ```
 
 ## Test
