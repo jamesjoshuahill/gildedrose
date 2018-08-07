@@ -16,16 +16,16 @@ type Item interface {
 func NewItem(name string, sellIn, quality int) Item {
 	switch name {
 	case agedBrie:
-		return &AgedBrie{sellIn: NewSellIn(sellIn), quality: quality}
+		return &AgedBrie{sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
 	case backstagePasses:
-		return &BackstagePasses{sellIn: NewSellIn(sellIn), quality: quality}
+		return &BackstagePasses{sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
 	case sulfuras:
-		return Sulfuras{sellIn: NewSellIn(sellIn), quality: quality}
+		return Sulfuras{sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
 	default:
 		return &MagicItem{
 			name:    name,
 			sellIn:  NewSellIn(sellIn),
-			quality: quality,
+			quality: NewQuality(quality),
 		}
 	}
 }
@@ -42,10 +42,31 @@ func (s *SellIn) Tick() {
 	s.value = s.value - 1
 }
 
+type Quality struct {
+	value int
+}
+
+func NewQuality(value int) *Quality {
+	return &Quality{value: value}
+}
+
+func (q *Quality) Update(amount int) {
+	v := q.value + amount
+
+	if v < 0 {
+		v = 0
+	}
+	if v > 50 {
+		v = 50
+	}
+
+	q.value = v
+}
+
 type MagicItem struct {
 	name    string
 	sellIn  *SellIn
-	quality int
+	quality *Quality
 }
 
 func (m MagicItem) Name() string {
@@ -57,7 +78,7 @@ func (m MagicItem) SellIn() int {
 }
 
 func (m MagicItem) Quality() int {
-	return m.quality
+	return m.quality.value
 }
 
 func (m *MagicItem) Update() {
@@ -69,12 +90,12 @@ func (m *MagicItem) Update() {
 	}
 
 	m.sellIn.Tick()
-	m.quality = normaliseQuality(m.quality, change)
+	m.quality.Update(change)
 }
 
 type Sulfuras struct {
 	sellIn  *SellIn
-	quality int
+	quality *Quality
 }
 
 func (s Sulfuras) Name() string {
@@ -86,7 +107,7 @@ func (s Sulfuras) SellIn() int {
 }
 
 func (s Sulfuras) Quality() int {
-	return s.quality
+	return s.quality.value
 }
 
 func (s Sulfuras) Update() {
@@ -95,7 +116,7 @@ func (s Sulfuras) Update() {
 
 type AgedBrie struct {
 	sellIn  *SellIn
-	quality int
+	quality *Quality
 }
 
 func (a AgedBrie) Name() string {
@@ -107,7 +128,7 @@ func (a AgedBrie) SellIn() int {
 }
 
 func (a AgedBrie) Quality() int {
-	return a.quality
+	return a.quality.value
 }
 
 func (a *AgedBrie) Update() {
@@ -119,12 +140,12 @@ func (a *AgedBrie) Update() {
 	}
 
 	a.sellIn.Tick()
-	a.quality = normaliseQuality(a.quality, change)
+	a.quality.Update(change)
 }
 
 type BackstagePasses struct {
 	sellIn  *SellIn
-	quality int
+	quality *Quality
 }
 
 func (b BackstagePasses) Name() string {
@@ -136,7 +157,7 @@ func (b BackstagePasses) SellIn() int {
 }
 
 func (b BackstagePasses) Quality() int {
-	return b.quality
+	return b.quality.value
 }
 
 func (b *BackstagePasses) Update() {
@@ -151,22 +172,9 @@ func (b *BackstagePasses) Update() {
 		change = 3
 	}
 	if b.sellIn.value <= 0 {
-		change = -b.quality
+		change = -b.quality.value
 	}
 
 	b.sellIn.Tick()
-	b.quality = normaliseQuality(b.quality, change)
-}
-
-func normaliseQuality(current int, change int) int {
-	q := current + change
-
-	if q < 0 {
-		q = 0
-	}
-	if q > 50 {
-		q = 50
-	}
-
-	return q
+	b.quality.Update(change)
 }
