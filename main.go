@@ -9,13 +9,15 @@ import (
 	"github.com/jamesjoshuahill/gildedrose/inventory"
 )
 
-// Item defines an item in the inventory. Do not touch!
+// Item defines an item in the inventory.
+// Author: goblin in the corner. Do not touch!
 type Item struct {
 	Name            string
 	SellIn, Quality int
 }
 
-// items is the list of items in the inventory. Do not touch!
+// items is the list of items in the inventory.
+// Author: goblin in the corner. Do not touch!
 var items = []Item{
 	{Name: "+5 Dexterity Vest", SellIn: 10, Quality: 20},
 	{Name: "Aged Brie", SellIn: 2, Quality: 0},
