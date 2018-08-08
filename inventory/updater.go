@@ -1,31 +1,31 @@
 package inventory
 
 type updater interface {
-	update(*SellIn, *Quality)
+	update(*sellIn, *quality)
 }
 
 type noopUpdater struct{}
 
-func (noopUpdater) update(s *SellIn, q *Quality) {}
+func (noopUpdater) update(s *sellIn, q *quality) {}
 
 type standardUpdater struct {
 	change, changePassedSellIn int
 }
 
-func (u standardUpdater) update(sellIn *SellIn, quality *Quality) {
+func (u standardUpdater) update(sellIn *sellIn, quality *quality) {
 	change := u.change
-	if sellIn.Passed() {
+	if sellIn.passed() {
 		change = u.changePassedSellIn
 	}
-	quality.Update(change)
+	quality.update(change)
 
-	sellIn.Decrement()
+	sellIn.decrement()
 }
 
 type backstagePassUpdater struct{}
 
-func (backstagePassUpdater) update(sellIn *SellIn, quality *Quality) {
-	days := sellIn.Days()
+func (backstagePassUpdater) update(sellIn *sellIn, quality *quality) {
+	days := sellIn.value
 	change := 1
 	if days <= 10 && days > 5 {
 		change = 2
@@ -33,10 +33,10 @@ func (backstagePassUpdater) update(sellIn *SellIn, quality *Quality) {
 	if days <= 5 && days > 0 {
 		change = 3
 	}
-	if sellIn.Passed() {
-		change = -quality.Value()
+	if sellIn.passed() {
+		change = -quality.value
 	}
-	quality.Update(change)
+	quality.update(change)
 
-	sellIn.Decrement()
+	sellIn.decrement()
 }

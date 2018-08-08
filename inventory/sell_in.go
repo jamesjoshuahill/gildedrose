@@ -1,21 +1,13 @@
 package inventory
 
-type SellIn struct {
-	days int
+type sellIn struct {
+	value int
 }
 
-func NewSellIn(value int) *SellIn {
-	return &SellIn{days: value}
+func (s sellIn) passed() bool {
+	return s.value <= 0
 }
 
-func (s SellIn) Days() int {
-	return s.days
-}
-
-func (s SellIn) Passed() bool {
-	return s.days <= 0
-}
-
-func (s *SellIn) Decrement() {
-	s.days = s.days - 1
+func (s *sellIn) decrement() {
+	s.value = s.value - 1
 }

@@ -5,19 +5,11 @@ const (
 	maxQuality = 50
 )
 
-type Quality struct {
+type quality struct {
 	value int
 }
 
-func NewQuality(value int) *Quality {
-	return &Quality{value: value}
-}
-
-func (q Quality) Value() int {
-	return q.value
-}
-
-func (q *Quality) Update(amount int) {
+func (q *quality) update(amount int) {
 	v := q.value + amount
 
 	if v < minQuality {

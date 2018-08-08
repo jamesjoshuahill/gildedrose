@@ -14,28 +14,28 @@ type Item interface {
 	Update()
 }
 
-func NewItem(name string, sellIn, quality int) Item {
-	s := NewSellIn(sellIn)
-	q := NewQuality(quality)
+func NewItem(name string, sellInValue, qualityValue int) Item {
+	sellIn := &sellIn{value: sellInValue}
+	quality := &quality{value: qualityValue}
 
 	switch name {
 	case agedBrie:
-		return item{name, s, q, standardUpdater{change: 1, changePassedSellIn: 2}}
+		return item{name, sellIn, quality, standardUpdater{change: 1, changePassedSellIn: 2}}
 	case conjured:
-		return item{name, s, q, standardUpdater{change: -2, changePassedSellIn: -4}}
+		return item{name, sellIn, quality, standardUpdater{change: -2, changePassedSellIn: -4}}
 	case backstagePasses:
-		return item{name, s, q, backstagePassUpdater{}}
+		return item{name, sellIn, quality, backstagePassUpdater{}}
 	case sulfuras:
-		return item{name, s, q, noopUpdater{}}
+		return item{name, sellIn, quality, noopUpdater{}}
 	default:
-		return item{name, s, q, standardUpdater{change: -1, changePassedSellIn: -2}}
+		return item{name, sellIn, quality, standardUpdater{change: -1, changePassedSellIn: -2}}
 	}
 }
 
 type item struct {
 	name    string
-	sellIn  *SellIn
-	quality *Quality
+	sellIn  *sellIn
+	quality *quality
 	updater
 }
 
@@ -44,11 +44,11 @@ func (b item) Name() string {
 }
 
 func (b item) SellIn() int {
-	return b.sellIn.Days()
+	return b.sellIn.value
 }
 
 func (b item) Quality() int {
-	return b.quality.Value()
+	return b.quality.value
 }
 
 func (b item) Update() {
