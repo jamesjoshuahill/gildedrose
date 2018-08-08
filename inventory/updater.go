@@ -9,13 +9,13 @@ type noopUpdater struct{}
 func (noopUpdater) update(s *sellIn, q *quality) {}
 
 type standardUpdater struct {
-	change, changePassedSellIn int
+	changeInDate, changeOutOfDate int
 }
 
 func (u standardUpdater) update(sellIn *sellIn, quality *quality) {
-	change := u.change
+	change := u.changeInDate
 	if sellIn.lessThan(1) {
-		change = u.changePassedSellIn
+		change = u.changeOutOfDate
 	}
 	quality.update(change)
 

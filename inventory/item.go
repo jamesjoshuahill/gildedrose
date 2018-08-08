@@ -11,15 +11,15 @@ func NewItem(name string, sellInValue, qualityValue int) Item {
 	var updater updater
 	switch name {
 	case "Aged Brie":
-		updater = standardUpdater{change: 1, changePassedSellIn: 2}
+		updater = standardUpdater{changeInDate: 1, changeOutOfDate: 2}
 	case "Conjured Mana Cake":
-		updater = standardUpdater{change: -2, changePassedSellIn: -4}
+		updater = standardUpdater{changeInDate: -2, changeOutOfDate: -4}
 	case "Backstage passes to a TAFKAL80ETC concert":
 		updater = backstagePassUpdater{}
 	case "Sulfuras, Hand of Ragnaros":
 		updater = noopUpdater{}
 	default:
-		updater = standardUpdater{change: -1, changePassedSellIn: -2}
+		updater = standardUpdater{changeInDate: -1, changeOutOfDate: -2}
 	}
 
 	return item{name, &sellIn{value: sellInValue}, &quality{value: qualityValue}, updater}
