@@ -1,21 +1,7 @@
 package inventory
 
 type NormalItem struct {
-	name    string
-	sellIn  *SellIn
-	quality *Quality
-}
-
-func (n NormalItem) Name() string {
-	return n.name
-}
-
-func (n NormalItem) SellIn() int {
-	return n.sellIn.Value()
-}
-
-func (n NormalItem) Quality() int {
-	return n.quality.Value()
+	item
 }
 
 func (n *NormalItem) Update() {

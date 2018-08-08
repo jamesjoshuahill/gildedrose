@@ -1,20 +1,7 @@
 package inventory
 
 type AgedBrie struct {
-	sellIn  *SellIn
-	quality *Quality
-}
-
-func (a AgedBrie) Name() string {
-	return agedBrie
-}
-
-func (a AgedBrie) SellIn() int {
-	return a.sellIn.Value()
-}
-
-func (a AgedBrie) Quality() int {
-	return a.quality.Value()
+	item
 }
 
 func (a *AgedBrie) Update() {

@@ -15,23 +15,41 @@ type Item interface {
 	Update()
 }
 
+type item struct {
+	name    string
+	sellIn  *SellIn
+	quality *Quality
+}
+
+func (b item) Name() string {
+	return b.name
+}
+
+func (b item) SellIn() int {
+	return b.sellIn.Value()
+}
+
+func (b item) Quality() int {
+	return b.quality.Value()
+}
+
+func (b item) Update() {
+	return
+}
+
 func NewItem(name string, sellIn, quality int) Item {
 	if strings.HasPrefix(name, "Conjured") {
-		return &ConjuredItem{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
+		return &ConjuredItem{item: item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}}
 	}
 
 	switch name {
 	case agedBrie:
-		return &AgedBrie{sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
+		return &AgedBrie{item: item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}}
 	case backstagePasses:
-		return &BackstagePasses{sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
+		return &BackstagePasses{item: item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}}
 	case sulfuras:
-		return Sulfuras{sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
+		return item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
 	default:
-		return &NormalItem{
-			name:    name,
-			sellIn:  NewSellIn(sellIn),
-			quality: NewQuality(quality),
-		}
+		return &NormalItem{item: item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}}
 	}
 }

@@ -1,20 +1,7 @@
 package inventory
 
 type BackstagePasses struct {
-	sellIn  *SellIn
-	quality *Quality
-}
-
-func (b BackstagePasses) Name() string {
-	return backstagePasses
-}
-
-func (b BackstagePasses) SellIn() int {
-	return b.sellIn.Value()
-}
-
-func (b BackstagePasses) Quality() int {
-	return b.quality.Value()
+	item
 }
 
 func (b *BackstagePasses) Update() {

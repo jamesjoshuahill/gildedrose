@@ -19,7 +19,6 @@ var _ = Describe("Item", func() {
 	It("creates Sulfuras", func() {
 		item := inventory.NewItem("Sulfuras, Hand of Ragnaros", 10, 80)
 
-		Expect(item).To(BeAssignableToTypeOf(inventory.Sulfuras{}))
 		Expect(item.Name()).To(Equal("Sulfuras, Hand of Ragnaros"))
 		Expect(item.SellIn()).To(Equal(10))
 		Expect(item.Quality()).To(Equal(80))

@@ -1,21 +1,7 @@
 package inventory
 
 type ConjuredItem struct {
-	name    string
-	sellIn  *SellIn
-	quality *Quality
-}
-
-func (c ConjuredItem) Name() string {
-	return c.name
-}
-
-func (c ConjuredItem) SellIn() int {
-	return c.sellIn.Value()
-}
-
-func (c ConjuredItem) Quality() int {
-	return c.quality.Value()
+	item
 }
 
 func (c *ConjuredItem) Update() {
