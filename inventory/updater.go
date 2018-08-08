@@ -14,7 +14,7 @@ type standardUpdater struct {
 
 func (u standardUpdater) update(sellIn *sellIn, quality *quality) {
 	change := u.change
-	if sellIn.passed() {
+	if sellIn.lessThan(1) {
 		change = u.changePassedSellIn
 	}
 	quality.update(change)
@@ -32,11 +32,10 @@ func (backstagePassUpdater) update(sellIn *sellIn, quality *quality) {
 	if sellIn.lessThan(6) {
 		change = 3
 	}
-	quality.update(change)
-
-	if sellIn.passed() {
-		quality.zero()
+	if sellIn.lessThan(1) {
+		change = -maxQuality
 	}
+	quality.update(change)
 
 	sellIn.decrement()
 }

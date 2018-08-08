@@ -9,10 +9,6 @@ type quality struct {
 	value int
 }
 
-func (q *quality) zero() {
-	q.value = 0
-}
-
 func (q *quality) update(amount int) {
 	v := q.value + amount
 
