@@ -25,7 +25,7 @@ func NewItem(name string, sellIn, quality int) Item {
 	case agedBrie:
 		return newStandardUpdateItem(name, sellIn, quality, 1, 2)
 	case backstagePasses:
-		return &backstagePass{item: newItem(name, sellIn, quality)}
+		return newBackstagePass(name, sellIn, quality)
 	case sulfuras:
 		return newItem(name, sellIn, quality)
 	default:

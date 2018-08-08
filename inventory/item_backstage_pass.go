@@ -4,6 +4,10 @@ type backstagePass struct {
 	item
 }
 
+func newBackstagePass(name string, sellIn, quality int) *backstagePass {
+	return &backstagePass{item: newItem(name, sellIn, quality)}
+}
+
 func (b *backstagePass) Update() {
 	days := b.sellIn.Days()
 	change := 1
