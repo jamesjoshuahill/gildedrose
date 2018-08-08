@@ -1,10 +1,10 @@
 package inventory
 
-type BackstagePasses struct {
+type backstagePass struct {
 	item
 }
 
-func (b *BackstagePasses) Update() {
+func (b *backstagePass) Update() {
 	days := b.sellIn.Days()
 	change := 1
 	if days <= 10 && days > 5 {

@@ -34,7 +34,6 @@ var _ = Describe("Item", func() {
 	It("creates Backstage Passes", func() {
 		item := inventory.NewItem("Backstage passes to a TAFKAL80ETC concert", 15, 20)
 
-		Expect(item).To(BeAssignableToTypeOf(&inventory.BackstagePasses{}))
 		Expect(item.Name()).To(Equal("Backstage passes to a TAFKAL80ETC concert"))
 		Expect(item.SellIn()).To(Equal(15))
 		Expect(item.Quality()).To(Equal(20))
