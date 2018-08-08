@@ -21,6 +21,10 @@ type item struct {
 	quality *Quality
 }
 
+func newItem(name string, sellIn, quality int) item {
+	return item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
+}
+
 func (b item) Name() string {
 	return b.name
 }
@@ -42,6 +46,14 @@ type standardUpdateItem struct {
 	change, changePassedSellIn int
 }
 
+func newStandardUpdateItem(name string, sellIn, quality, change, changePassedSellIn int) *standardUpdateItem {
+	return &standardUpdateItem{
+		item:               newItem(name, sellIn, quality),
+		change:             change,
+		changePassedSellIn: changePassedSellIn,
+	}
+}
+
 func (q *standardUpdateItem) Update() {
 	change := q.change
 	if q.sellIn.Passed() {
@@ -54,29 +66,17 @@ func (q *standardUpdateItem) Update() {
 
 func NewItem(name string, sellIn, quality int) Item {
 	if strings.HasPrefix(name, "Conjured") {
-		return &standardUpdateItem{
-			item:               item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)},
-			change:             -2,
-			changePassedSellIn: -4,
-		}
+		return newStandardUpdateItem(name, sellIn, quality, -2, -4)
 	}
 
 	switch name {
 	case agedBrie:
-		return &standardUpdateItem{
-			item:               item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)},
-			change:             1,
-			changePassedSellIn: 2,
-		}
+		return newStandardUpdateItem(name, sellIn, quality, 1, 2)
 	case backstagePasses:
-		return &BackstagePasses{item: item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}}
+		return &BackstagePasses{item: newItem(name, sellIn, quality)}
 	case sulfuras:
-		return item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)}
+		return newItem(name, sellIn, quality)
 	default:
-		return &standardUpdateItem{
-			item:               item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality)},
-			change:             -1,
-			changePassedSellIn: -2,
-		}
+		return newStandardUpdateItem(name, sellIn, quality, -1, -2)
 	}
 }
