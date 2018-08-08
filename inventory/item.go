@@ -1,12 +1,5 @@
 package inventory
 
-const (
-	agedBrie        = "Aged Brie"
-	backstagePasses = "Backstage passes to a TAFKAL80ETC concert"
-	conjured        = "Conjured Mana Cake"
-	sulfuras        = "Sulfuras, Hand of Ragnaros"
-)
-
 type Item interface {
 	Name() string
 	SellIn() int
@@ -15,21 +8,21 @@ type Item interface {
 }
 
 func NewItem(name string, sellInValue, qualityValue int) Item {
-	sellIn := &sellIn{value: sellInValue}
-	quality := &quality{value: qualityValue}
-
+	var updater updater
 	switch name {
-	case agedBrie:
-		return item{name, sellIn, quality, standardUpdater{change: 1, changePassedSellIn: 2}}
-	case conjured:
-		return item{name, sellIn, quality, standardUpdater{change: -2, changePassedSellIn: -4}}
-	case backstagePasses:
-		return item{name, sellIn, quality, backstagePassUpdater{}}
-	case sulfuras:
-		return item{name, sellIn, quality, noopUpdater{}}
+	case "Aged Brie":
+		updater = standardUpdater{change: 1, changePassedSellIn: 2}
+	case "Conjured Mana Cake":
+		updater = standardUpdater{change: -2, changePassedSellIn: -4}
+	case "Backstage passes to a TAFKAL80ETC concert":
+		updater = backstagePassUpdater{}
+	case "Sulfuras, Hand of Ragnaros":
+		updater = noopUpdater{}
 	default:
-		return item{name, sellIn, quality, standardUpdater{change: -1, changePassedSellIn: -2}}
+		updater = standardUpdater{change: -1, changePassedSellIn: -2}
 	}
+
+	return item{name, &sellIn{value: sellInValue}, &quality{value: qualityValue}, updater}
 }
 
 type item struct {
