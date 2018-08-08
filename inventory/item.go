@@ -1,11 +1,9 @@
 package inventory
 
-import "strings"
-
 const (
 	agedBrie        = "Aged Brie"
 	backstagePasses = "Backstage passes to a TAFKAL80ETC concert"
-	conjured        = "Conjured"
+	conjured        = "Conjured Mana Cake"
 	sulfuras        = "Sulfuras, Hand of Ragnaros"
 )
 
@@ -20,13 +18,11 @@ func NewItem(name string, sellIn, quality int) Item {
 	s := NewSellIn(sellIn)
 	q := NewQuality(quality)
 
-	if strings.HasPrefix(name, conjured) {
-		return item{name, s, q, standardUpdater{change: -2, changePassedSellIn: -4}}
-	}
-
 	switch name {
 	case agedBrie:
 		return item{name, s, q, standardUpdater{change: 1, changePassedSellIn: 2}}
+	case conjured:
+		return item{name, s, q, standardUpdater{change: -2, changePassedSellIn: -4}}
 	case backstagePasses:
 		return item{name, s, q, backstagePassUpdater{}}
 	case sulfuras:
