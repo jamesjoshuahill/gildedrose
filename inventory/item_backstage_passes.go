@@ -5,16 +5,16 @@ type BackstagePasses struct {
 }
 
 func (b *BackstagePasses) Update() {
-	current := b.sellIn.Value()
+	days := b.sellIn.Days()
 
 	var change int
-	if current > 10 {
+	if days > 10 {
 		change = 1
 	}
-	if current <= 10 && current > 5 {
+	if days <= 10 && days > 5 {
 		change = 2
 	}
-	if current <= 5 && current > 0 {
+	if days <= 5 && days > 0 {
 		change = 3
 	}
 	if b.sellIn.Passed() {

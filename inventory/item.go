@@ -26,7 +26,7 @@ func (b item) Name() string {
 }
 
 func (b item) SellIn() int {
-	return b.sellIn.Value()
+	return b.sellIn.Days()
 }
 
 func (b item) Quality() int {
