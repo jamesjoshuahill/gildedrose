@@ -17,7 +17,7 @@ func (b *BackstagePasses) Update() {
 	if current <= 5 && current > 0 {
 		change = 3
 	}
-	if current <= 0 {
+	if b.sellIn.Passed() {
 		change = -b.quality.Value()
 	}
 

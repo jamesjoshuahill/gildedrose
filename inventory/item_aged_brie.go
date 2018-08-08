@@ -6,7 +6,7 @@ type AgedBrie struct {
 
 func (a *AgedBrie) Update() {
 	var change int
-	if a.sellIn.Value() < 1 {
+	if a.sellIn.Passed() {
 		change = 2
 	} else {
 		change = 1

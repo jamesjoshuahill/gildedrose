@@ -12,6 +12,10 @@ func (s SellIn) Value() int {
 	return s.value
 }
 
+func (s SellIn) Passed() bool {
+	return s.value <= 0
+}
+
 func (s *SellIn) Decrement() {
 	s.value = s.value - 1
 }

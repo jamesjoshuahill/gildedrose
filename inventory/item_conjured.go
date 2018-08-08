@@ -6,7 +6,7 @@ type ConjuredItem struct {
 
 func (c *ConjuredItem) Update() {
 	var change int
-	if c.sellIn.Value() < 1 {
+	if c.sellIn.Passed() {
 		change = -4
 	} else {
 		change = -2

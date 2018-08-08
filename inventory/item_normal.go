@@ -6,7 +6,7 @@ type NormalItem struct {
 
 func (n *NormalItem) Update() {
 	var change int
-	if n.sellIn.Value() < 1 {
+	if n.sellIn.Passed() {
 		change = -2
 	} else {
 		change = -1
