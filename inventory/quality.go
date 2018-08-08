@@ -1,5 +1,10 @@
 package inventory
 
+const (
+	minQuality = 0
+	maxQuality = 50
+)
+
 type Quality struct {
 	value int
 }
@@ -15,11 +20,11 @@ func (q Quality) Value() int {
 func (q *Quality) Update(amount int) {
 	v := q.value + amount
 
-	if v < 0 {
-		v = 0
+	if v < minQuality {
+		v = minQuality
 	}
-	if v > 50 {
-		v = 50
+	if v > maxQuality {
+		v = maxQuality
 	}
 
 	q.value = v
