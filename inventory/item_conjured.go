@@ -13,5 +13,5 @@ func (c *ConjuredItem) Update() {
 	}
 
 	c.quality.Update(change)
-	c.sellIn.Tick()
+	c.sellIn.Decrement()
 }

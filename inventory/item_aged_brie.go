@@ -13,5 +13,5 @@ func (a *AgedBrie) Update() {
 	}
 
 	a.quality.Update(change)
-	a.sellIn.Tick()
+	a.sellIn.Decrement()
 }

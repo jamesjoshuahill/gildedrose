@@ -22,5 +22,5 @@ func (b *BackstagePasses) Update() {
 	}
 
 	b.quality.Update(change)
-	b.sellIn.Tick()
+	b.sellIn.Decrement()
 }

@@ -12,6 +12,6 @@ func (s SellIn) Value() int {
 	return s.value
 }
 
-func (s *SellIn) Tick() {
+func (s *SellIn) Decrement() {
 	s.value = s.value - 1
 }

@@ -13,5 +13,5 @@ func (n *NormalItem) Update() {
 	}
 
 	n.quality.Update(change)
-	n.sellIn.Tick()
+	n.sellIn.Decrement()
 }
