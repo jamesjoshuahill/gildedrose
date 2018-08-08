@@ -25,12 +25,11 @@ func (u standardUpdater) update(sellIn *sellIn, quality *quality) {
 type backstagePassUpdater struct{}
 
 func (backstagePassUpdater) update(sellIn *sellIn, quality *quality) {
-	days := sellIn.value
 	change := 1
-	if days <= 10 && days > 5 {
+	if sellIn.between(6, 10) {
 		change = 2
 	}
-	if days <= 5 && days > 0 {
+	if sellIn.between(1, 5) {
 		change = 3
 	}
 	if sellIn.passed() {
