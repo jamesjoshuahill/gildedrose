@@ -26,10 +26,10 @@ type backstagePassUpdater struct{}
 
 func (backstagePassUpdater) update(sellIn *sellIn, quality *quality) {
 	change := 1
-	if sellIn.between(6, 10) {
+	if sellIn.lessThan(11) {
 		change = 2
 	}
-	if sellIn.between(1, 5) {
+	if sellIn.lessThan(6) {
 		change = 3
 	}
 	quality.update(change)

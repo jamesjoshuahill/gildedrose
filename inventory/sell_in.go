@@ -8,8 +8,8 @@ func (s sellIn) passed() bool {
 	return s.value <= 0
 }
 
-func (s sellIn) between(min, max int) bool {
-	return s.value >= min && s.value <= max
+func (s sellIn) lessThan(days int) bool {
+	return s.value < days
 }
 
 func (s *sellIn) decrement() {
