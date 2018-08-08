@@ -10,7 +10,6 @@ var _ = Describe("Item", func() {
 	It("creates normal items", func() {
 		item := inventory.NewItem("some-name", 1, 2)
 
-		Expect(item).To(BeAssignableToTypeOf(&inventory.NormalItem{}))
 		Expect(item.Name()).To(Equal("some-name"))
 		Expect(item.SellIn()).To(Equal(1))
 		Expect(item.Quality()).To(Equal(2))
@@ -27,7 +26,6 @@ var _ = Describe("Item", func() {
 	It("creates AgedBrie", func() {
 		item := inventory.NewItem("Aged Brie", 2, 0)
 
-		Expect(item).To(BeAssignableToTypeOf(&inventory.AgedBrie{}))
 		Expect(item.Name()).To(Equal("Aged Brie"))
 		Expect(item.SellIn()).To(Equal(2))
 		Expect(item.Quality()).To(Equal(0))
@@ -45,7 +43,6 @@ var _ = Describe("Item", func() {
 	It("creates Conjured items", func() {
 		item := inventory.NewItem("Conjured Mana Cake", 3, 6)
 
-		Expect(item).To(BeAssignableToTypeOf(&inventory.ConjuredItem{}))
 		Expect(item.Name()).To(Equal("Conjured Mana Cake"))
 		Expect(item.SellIn()).To(Equal(3))
 		Expect(item.Quality()).To(Equal(6))

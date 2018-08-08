@@ -22,6 +22,8 @@ var _ = Describe("Inventory", func() {
 
 		i.Update()
 
-		Expect(i.List()).To(ConsistOf(inventory.NewItem("some-item", 0, 0)))
+		Expect(i.List()).To(HaveLen(1))
+		Expect(i.List()[0].SellIn()).To(Equal(0))
+		Expect(i.List()[0].Quality()).To(Equal(0))
 	})
 })
