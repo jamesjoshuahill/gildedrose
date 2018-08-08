@@ -6,11 +6,7 @@ type BackstagePasses struct {
 
 func (b *BackstagePasses) Update() {
 	days := b.sellIn.Days()
-
-	var change int
-	if days > 10 {
-		change = 1
-	}
+	change := 1
 	if days <= 10 && days > 5 {
 		change = 2
 	}
@@ -20,7 +16,7 @@ func (b *BackstagePasses) Update() {
 	if b.sellIn.Passed() {
 		change = -b.quality.Value()
 	}
-
 	b.quality.Update(change)
+
 	b.sellIn.Decrement()
 }

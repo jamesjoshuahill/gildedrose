@@ -5,13 +5,11 @@ type NormalItem struct {
 }
 
 func (n *NormalItem) Update() {
-	var change int
+	change := -1
 	if n.sellIn.Passed() {
 		change = -2
-	} else {
-		change = -1
 	}
-
 	n.quality.Update(change)
+
 	n.sellIn.Decrement()
 }

@@ -5,13 +5,11 @@ type ConjuredItem struct {
 }
 
 func (c *ConjuredItem) Update() {
-	var change int
+	change := -2
 	if c.sellIn.Passed() {
 		change = -4
-	} else {
-		change = -2
 	}
-
 	c.quality.Update(change)
+
 	c.sellIn.Decrement()
 }
