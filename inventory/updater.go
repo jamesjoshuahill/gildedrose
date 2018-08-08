@@ -13,29 +13,29 @@ type standardUpdater struct {
 }
 
 func (u standardUpdater) update(sellIn *sellIn, quality *quality) {
+	sellIn.decrement()
+
 	change := u.changeInDate
-	if sellIn.lessThan(1) {
+	if sellIn.lessThan(0) {
 		change = u.changeOutOfDate
 	}
 	quality.update(change)
-
-	sellIn.decrement()
 }
 
 type backstagePassUpdater struct{}
 
 func (backstagePassUpdater) update(sellIn *sellIn, quality *quality) {
+	sellIn.decrement()
+
 	change := 1
-	if sellIn.lessThan(11) {
+	if sellIn.lessThan(10) {
 		change = 2
 	}
-	if sellIn.lessThan(6) {
+	if sellIn.lessThan(5) {
 		change = 3
 	}
-	if sellIn.lessThan(1) {
+	if sellIn.lessThan(0) {
 		change = -maxQuality
 	}
 	quality.update(change)
-
-	sellIn.decrement()
 }
