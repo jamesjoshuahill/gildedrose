@@ -32,10 +32,11 @@ func (backstagePassUpdater) update(sellIn *sellIn, quality *quality) {
 	if sellIn.between(1, 5) {
 		change = 3
 	}
-	if sellIn.passed() {
-		change = -quality.value
-	}
 	quality.update(change)
+
+	if sellIn.passed() {
+		quality.zero()
+	}
 
 	sellIn.decrement()
 }
