@@ -17,19 +17,22 @@ type Item interface {
 }
 
 func NewItem(name string, sellIn, quality int) Item {
+	s := NewSellIn(sellIn)
+	q := NewQuality(quality)
+
 	if strings.HasPrefix(name, conjured) {
-		return newItem(name, sellIn, quality, standardUpdater{change: -2, changePassedSellIn: -4})
+		return item{name, s, q, standardUpdater{change: -2, changePassedSellIn: -4}}
 	}
 
 	switch name {
 	case agedBrie:
-		return newItem(name, sellIn, quality, standardUpdater{change: 1, changePassedSellIn: 2})
+		return item{name, s, q, standardUpdater{change: 1, changePassedSellIn: 2}}
 	case backstagePasses:
-		return newItem(name, sellIn, quality, backstagePassUpdater{})
+		return item{name, s, q, backstagePassUpdater{}}
 	case sulfuras:
-		return newItem(name, sellIn, quality, noopUpdater{})
+		return item{name, s, q, noopUpdater{}}
 	default:
-		return newItem(name, sellIn, quality, standardUpdater{change: -1, changePassedSellIn: -2})
+		return item{name, s, q, standardUpdater{change: -1, changePassedSellIn: -2}}
 	}
 }
 
@@ -38,10 +41,6 @@ type item struct {
 	sellIn  *SellIn
 	quality *Quality
 	updater
-}
-
-func newItem(name string, sellIn, quality int, updater updater) item {
-	return item{name: name, sellIn: NewSellIn(sellIn), quality: NewQuality(quality), updater: updater}
 }
 
 func (b item) Name() string {
