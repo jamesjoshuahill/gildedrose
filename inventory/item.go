@@ -5,6 +5,7 @@ import "strings"
 const (
 	agedBrie        = "Aged Brie"
 	backstagePasses = "Backstage passes to a TAFKAL80ETC concert"
+	conjured        = "Conjured"
 	sulfuras        = "Sulfuras, Hand of Ragnaros"
 )
 
@@ -65,7 +66,7 @@ func (q *standardUpdateItem) Update() {
 }
 
 func NewItem(name string, sellIn, quality int) Item {
-	if strings.HasPrefix(name, "Conjured") {
+	if strings.HasPrefix(name, conjured) {
 		return newStandardUpdateItem(name, sellIn, quality, -2, -4)
 	}
 
