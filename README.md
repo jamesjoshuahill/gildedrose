@@ -24,6 +24,8 @@ $ go get github.com/onsi/ginkgo/ginkgo
 $ ginkgo -r -p -keepGoing
 ```
 
+Unfortunately, the tests are failing :worried:
+
 ## Refactor
 
 The [Gilded Rose Requirements](https://github.com/jamesjoshuahill/gildedrose/blob/master/REQUIREMENTS.md) explain what
