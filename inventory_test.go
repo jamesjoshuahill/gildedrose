@@ -1,15 +1,15 @@
-package inventory_test
+package gildedrose_test
 
 import (
-	"github.com/jamesjoshuahill/gildedrose/inventory"
+	"github.com/jamesjoshuahill/gildedrose"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
 var _ = Describe("Inventory", func() {
 	It("lists items", func() {
-		items := []inventory.Item{inventory.NewItem("some-item", 1, 1)}
-		i := inventory.New(items)
+		items := []gildedrose.Item{gildedrose.NewItem("some-item", 1, 1)}
+		i := gildedrose.New(items)
 
 		list := i.List()
 
@@ -17,8 +17,8 @@ var _ = Describe("Inventory", func() {
 	})
 
 	It("updates items", func() {
-		items := []inventory.Item{inventory.NewItem("some-item", 1, 1)}
-		i := inventory.New(items)
+		items := []gildedrose.Item{gildedrose.NewItem("some-item", 1, 1)}
+		i := gildedrose.New(items)
 
 		i.Update()
 

@@ -1,4 +1,4 @@
-package inventory
+package gildedrose
 
 type Item interface {
 	Name() string

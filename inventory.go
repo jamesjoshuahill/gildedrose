@@ -1,4 +1,4 @@
-package inventory
+package gildedrose
 
 type inventory struct {
 	list []Item

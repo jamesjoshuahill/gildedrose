@@ -1,4 +1,4 @@
-package inventory
+package gildedrose
 
 type sellIn struct {
 	value int

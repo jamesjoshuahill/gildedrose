@@ -1,4 +1,4 @@
-package inventory_test
+package gildedrose_test
 
 import (
 	"testing"
@@ -9,5 +9,5 @@ import (
 
 func TestInventory(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Inventory Suite")
+	RunSpecs(t, "Gilded Rose Suite")
 }

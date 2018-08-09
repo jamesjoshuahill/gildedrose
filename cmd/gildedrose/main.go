@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/jamesjoshuahill/gildedrose/inventory"
+	"github.com/jamesjoshuahill/gildedrose"
 )
 
 // Item defines an item in the inventory.
@@ -41,11 +41,11 @@ func main() {
 		log.Fatalf("error parsing days: %s\nusage: gildedrose [days]\n", err)
 	}
 
-	var list []inventory.Item
+	var list []gildedrose.Item
 	for _, item := range items {
-		list = append(list, inventory.NewItem(item.Name, item.SellIn, item.Quality))
+		list = append(list, gildedrose.NewItem(item.Name, item.SellIn, item.Quality))
 	}
-	i := inventory.New(list)
+	i := gildedrose.New(list)
 
 	for day := 0; day <= days; day++ {
 		if day == 0 {

@@ -1,4 +1,4 @@
-package inventory
+package gildedrose
 
 const (
 	minQuality = 0

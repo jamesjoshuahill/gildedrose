@@ -1,4 +1,4 @@
-package inventory
+package gildedrose
 
 type updater interface {
 	update(*sellIn, *quality)
