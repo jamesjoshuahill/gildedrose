@@ -14,8 +14,6 @@ type Item struct {
 	SellIn, Quality int
 }
 
-// items is the list of items in the inventory.
-// Author: goblin in the corner. Do not touch!
 var items = []Item{
 	{Name: "+5 Dexterity Vest", SellIn: 10, Quality: 20},
 	{Name: "Aged Brie", SellIn: 2, Quality: 0},
