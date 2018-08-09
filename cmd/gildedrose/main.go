@@ -23,7 +23,7 @@ func main() {
 	for _, item := range items {
 		list = append(list, gildedrose.NewItem(item.Name, item.SellIn, item.Quality))
 	}
-	i := gildedrose.New(list)
+	app := gildedrose.New(list)
 
 	for day := 0; day <= 30; day++ {
 		if day == 0 {
@@ -33,9 +33,9 @@ func main() {
 		}
 		fmt.Printf("-------- day %d --------\n", day)
 		fmt.Printf("name, sellIn, quality\n")
-		for _, item := range i.Items {
+		for _, item := range list {
 			fmt.Printf("%s, %d, %d\n", item.Name(), item.SellIn(), item.Quality())
 		}
-		i.Update()
+		app.UpdateQuality()
 	}
 }

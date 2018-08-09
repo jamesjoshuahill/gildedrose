@@ -11,7 +11,7 @@ var _ = Describe("Inventory", func() {
 		items := []gildedrose.MagicItem{gildedrose.NewItem("some-item", 1, 1)}
 		i := gildedrose.New(items)
 
-		i.Update()
+		i.UpdateQuality()
 
 		Expect(items).To(HaveLen(1))
 		Expect(items[0].SellIn()).To(Equal(0))

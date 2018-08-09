@@ -8,7 +8,7 @@ func New(items []MagicItem) *GildedRose {
 	return &GildedRose{Items: items}
 }
 
-func (i *GildedRose) Update() {
+func (i *GildedRose) UpdateQuality() {
 	for _, item := range i.Items {
 		item.Update()
 	}
