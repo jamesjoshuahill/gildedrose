@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Item", func() {
+var _ = Describe("MagicItem", func() {
 	It("creates normal items", func() {
 		item := gildedrose.NewItem("some-name", 1, 2)
 

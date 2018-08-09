@@ -2,23 +2,11 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"strconv"
 
 	"github.com/jamesjoshuahill/gildedrose"
 )
 
-// Item defines an item in the inventory.
-// Author: goblin in the corner. Do not touch!
-type Item struct {
-	Name            string
-	SellIn, Quality int
-}
-
-// items is the list of items in the inventory.
-// Author: goblin in the corner. Do not touch!
-var items = []Item{
+var items = []gildedrose.Item{
 	{Name: "+5 Dexterity Vest", SellIn: 10, Quality: 20},
 	{Name: "Aged Brie", SellIn: 2, Quality: 0},
 	{Name: "Elixir of the Mongoose", SellIn: 5, Quality: 7},
@@ -31,23 +19,13 @@ var items = []Item{
 }
 
 func main() {
-	daysArg := "0"
-	if len(os.Args) == 2 {
-		daysArg = os.Args[1]
-	}
-
-	days, err := strconv.Atoi(daysArg)
-	if err != nil {
-		log.Fatalf("error parsing days: %s\nusage: gildedrose [days]\n", err)
-	}
-
-	var list []gildedrose.Item
+	var list []gildedrose.MagicItem
 	for _, item := range items {
 		list = append(list, gildedrose.NewItem(item.Name, item.SellIn, item.Quality))
 	}
 	i := gildedrose.New(list)
 
-	for day := 0; day <= days; day++ {
+	for day := 0; day <= 30; day++ {
 		if day == 0 {
 			fmt.Println("OMGHAI!")
 		} else {
@@ -55,7 +33,7 @@ func main() {
 		}
 		fmt.Printf("-------- day %d --------\n", day)
 		fmt.Printf("name, sellIn, quality\n")
-		for _, item := range i.List() {
+		for _, item := range i.Items {
 			fmt.Printf("%s, %d, %d\n", item.Name(), item.SellIn(), item.Quality())
 		}
 		i.Update()

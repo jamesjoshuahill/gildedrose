@@ -1,22 +1,15 @@
 package gildedrose
 
-type inventory struct {
-	list []Item
+type GildedRose struct {
+	Items []MagicItem
 }
 
-// New returns a new inventory with a list of items.
-func New(list []Item) *inventory {
-	return &inventory{list: list}
+func New(items []MagicItem) *GildedRose {
+	return &GildedRose{Items: items}
 }
 
-// List returns the items in the inventory.
-func (i *inventory) List() []Item {
-	return i.list
-}
-
-// Update changes the list of items in the inventory to reflect the passing of one day.
-func (i *inventory) Update() {
-	for _, item := range i.list {
+func (i *GildedRose) Update() {
+	for _, item := range i.Items {
 		item.Update()
 	}
 }

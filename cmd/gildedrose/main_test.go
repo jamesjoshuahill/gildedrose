@@ -16,7 +16,7 @@ var _ = Describe("Gilded Rose", func() {
 			contents, err := ioutil.ReadFile("../../GOLDEN_MASTER.txt")
 			Expect(err).NotTo(HaveOccurred())
 			expectedOutput := string(contents)
-			cmd := exec.Command(binaryPath, "30")
+			cmd := exec.Command(binaryPath)
 
 			session, err := gexec.Start(cmd, GinkgoWriter, GinkgoWriter)
 
