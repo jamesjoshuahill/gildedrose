@@ -7,13 +7,13 @@ type GildedRose struct {
 func New(items []Item) *GildedRose {
 	var magicItems []MagicItem
 	for _, item := range items {
-		magicItems = append(magicItems, NewItem(item.Name, item.SellIn, item.Quality))
+		magicItems = append(magicItems, NewMagicItem(item.Name, item.SellIn, item.Quality))
 	}
 	return &GildedRose{Items: magicItems}
 }
 
 func (i *GildedRose) UpdateQuality() {
 	for _, item := range i.Items {
-		item.Update()
+		item.UpdateQuality()
 	}
 }

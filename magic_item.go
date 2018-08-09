@@ -1,6 +1,6 @@
 package gildedrose
 
-func NewItem(name string, sellInValue, qualityValue int) MagicItem {
+func NewMagicItem(name string, sellInValue, qualityValue int) MagicItem {
 	var updater updater
 	switch name {
 	case "Aged Brie":
@@ -37,6 +37,6 @@ func (b MagicItem) Quality() int {
 	return b.quality.value
 }
 
-func (b *MagicItem) Update() {
+func (b *MagicItem) UpdateQuality() {
 	b.update(b.sellIn, b.quality)
 }
