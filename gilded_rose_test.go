@@ -7,7 +7,7 @@ import (
 )
 
 var _ = Describe("Gilded Rose", func() {
-	XIt("updates the quality of foo", func() {
+	It("foo", func() {
 		items := []gildedrose.Item{{Name: "foo", SellIn: 0, Quality: 0}}
 		app := gildedrose.New(items)
 

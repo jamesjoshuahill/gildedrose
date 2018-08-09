@@ -21,7 +21,7 @@ The test suite uses [Ginkgo](https://onsi.github.io/ginkgo/) and [Gomega](https:
 ```bash
 $ cd $GOPATH/src/github.com/jamesjoshuahill/gildedrose
 $ go get github.com/onsi/ginkgo/ginkgo
-$ ginkgo -r -p
+$ ginkgo -r -p -keepGoing
 ```
 
 ## Refactor

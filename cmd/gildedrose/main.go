@@ -29,9 +29,7 @@ func main() {
 		for _, item := range items {
 			fmt.Printf("%s, %d, %d\n", item.Name, item.SellIn, item.Quality)
 		}
-		if day != 30 {
-			fmt.Println()
-		}
+		fmt.Println()
 		app.UpdateQuality()
 	}
 }
