@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/jamesjoshuahill/gildedrose.svg?branch=master)](https://travis-ci.org/jamesjoshuahill/gildedrose)
 
-This is a refactoring kata created by Terry Hughes (http://twitter.com/TerryHughes). This version in Go is based on
-Emily Bache's [translation](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/go).
+This is a refactoring kata created in C# by [Terry Hughes](http://twitter.com/TerryHughes). This version is based on
+Emily Bache's [translation to Go](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/go).
 
 ## Get
 
