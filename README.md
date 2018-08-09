@@ -21,7 +21,7 @@ The test suite uses [Ginkgo](https://onsi.github.io/ginkgo/) and [Gomega](https:
 ```bash
 $ cd $GOPATH/src/github.com/jamesjoshuahill/gildedrose
 $ go get github.com/onsi/ginkgo/ginkgo
-$ ginkgo
+$ ginkgo -r -p
 ```
 
 ## Refactor
@@ -33,5 +33,5 @@ The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/GO
 output for 30 days. You can confirm there is no diff by running the test provided, or comparing the output:
 
 ```bash
-$ diff <(go run main.go 30) GOLDEN_MASTER.txt
+$ diff <(go run cmd/gildedrose/main.go) GOLDEN_MASTER.txt
 ```

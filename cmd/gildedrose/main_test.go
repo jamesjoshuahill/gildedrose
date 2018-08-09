@@ -1,4 +1,4 @@
-package main_test
+package main
 
 import (
 	"os/exec"
@@ -13,7 +13,7 @@ import (
 var _ = Describe("Gilded Rose", func() {
 	Context("when run for 30 days", func() {
 		It("updates the items correctly", func() {
-			contents, err := ioutil.ReadFile("golden_master.txt")
+			contents, err := ioutil.ReadFile("../../golden_master.txt")
 			Expect(err).NotTo(HaveOccurred())
 			expectedOutput := string(contents)
 			cmd := exec.Command(binaryPath, "30")

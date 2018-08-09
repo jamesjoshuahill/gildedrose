@@ -1,4 +1,4 @@
-package main_test
+package main
 
 import (
 	"testing"
@@ -12,11 +12,11 @@ var binaryPath string
 
 func TestGildedRose(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Gilded Rose Suite")
+	RunSpecs(t, "Integration Suite")
 }
 
 var _ = SynchronizedBeforeSuite(func() []byte {
-	binaryPath, err := gexec.Build("github.com/jamesjoshuahill/gildedrose")
+	binaryPath, err := gexec.Build("github.com/jamesjoshuahill/gildedrose/cmd/gildedrose")
 	Expect(err).NotTo(HaveOccurred())
 	return []byte(binaryPath)
 }, func(data []byte) {
