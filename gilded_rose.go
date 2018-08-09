@@ -4,8 +4,12 @@ type GildedRose struct {
 	Items []MagicItem
 }
 
-func New(items []MagicItem) *GildedRose {
-	return &GildedRose{Items: items}
+func New(items []Item) *GildedRose {
+	var magicItems []MagicItem
+	for _, item := range items {
+		magicItems = append(magicItems, NewItem(item.Name, item.SellIn, item.Quality))
+	}
+	return &GildedRose{Items: magicItems}
 }
 
 func (i *GildedRose) UpdateQuality() {

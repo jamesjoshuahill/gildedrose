@@ -8,13 +8,13 @@ import (
 
 var _ = Describe("Inventory", func() {
 	It("updates items", func() {
-		items := []gildedrose.MagicItem{gildedrose.NewItem("some-item", 1, 1)}
-		i := gildedrose.New(items)
+		items := []gildedrose.Item{{Name: "some-item", SellIn: 1, Quality: 1}}
+		app := gildedrose.New(items)
 
-		i.UpdateQuality()
+		app.UpdateQuality()
 
-		Expect(items).To(HaveLen(1))
-		Expect(items[0].SellIn()).To(Equal(0))
-		Expect(items[0].Quality()).To(Equal(0))
+		Expect(app.Items).To(HaveLen(1))
+		Expect(app.Items[0].SellIn()).To(Equal(0))
+		Expect(app.Items[0].Quality()).To(Equal(0))
 	})
 })

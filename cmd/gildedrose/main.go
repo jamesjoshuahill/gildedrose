@@ -19,11 +19,7 @@ var items = []gildedrose.Item{
 }
 
 func main() {
-	var list []gildedrose.MagicItem
-	for _, item := range items {
-		list = append(list, gildedrose.NewItem(item.Name, item.SellIn, item.Quality))
-	}
-	app := gildedrose.New(list)
+	app := gildedrose.New(items)
 
 	for day := 0; day <= 30; day++ {
 		if day == 0 {
@@ -33,7 +29,7 @@ func main() {
 		}
 		fmt.Printf("-------- day %d --------\n", day)
 		fmt.Printf("name, sellIn, quality\n")
-		for _, item := range list {
+		for _, item := range app.Items {
 			fmt.Printf("%s, %d, %d\n", item.Name(), item.SellIn(), item.Quality())
 		}
 		app.UpdateQuality()
