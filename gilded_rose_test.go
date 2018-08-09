@@ -7,8 +7,8 @@ import (
 )
 
 var _ = Describe("Inventory", func() {
-	It("updates items", func() {
-		items := []gildedrose.Item{{Name: "some-item", SellIn: 1, Quality: 1}}
+	It("updates the quality of normal items", func() {
+		items := []gildedrose.Item{gildedrose.NewItem("some-item", 1, 1)}
 		app := gildedrose.New(items)
 
 		app.UpdateQuality()
