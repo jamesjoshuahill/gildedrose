@@ -26,7 +26,7 @@ $ ginkgo
 
 ## Refactor
 
-The [Gilded Rose Requirements](https://github.com/jamesjoshuahill/gildedrose/blob/master/requirements.txt) explain what
+The [Gilded Rose Requirements](https://github.com/jamesjoshuahill/gildedrose/blob/master/REQUIREMENTS.md) explain what
 the code is for.
 
 The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/golden_master.txt) records the correct
