@@ -14,4 +14,4 @@ install:
 - dep ensure
 - go get github.com/onsi/ginkgo/ginkgo
 
-script: ginkgo -r -p -randomizeSuites -randomizeAllSpecs -race -cover -trace
+script: ginkgo -r -p -randomizeSuites -randomizeAllSpecs -keepGoing -race -cover -trace
