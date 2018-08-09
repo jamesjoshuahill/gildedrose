@@ -29,9 +29,9 @@ $ ginkgo
 The [Gilded Rose Requirements](https://github.com/jamesjoshuahill/gildedrose/blob/master/REQUIREMENTS.md) explain what
 the code is for.
 
-The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/golden_master.txt) records the correct
+The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/GOLDEN_MASTER.txt) records the correct
 output for 30 days. You can confirm there is no diff by running the test provided, or comparing the output:
 
 ```bash
-$ diff <(go run main.go 30) golden_master.txt
+$ diff <(go run main.go 30) GOLDEN_MASTER.txt
 ```
