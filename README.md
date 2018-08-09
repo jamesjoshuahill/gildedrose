@@ -9,6 +9,7 @@ Emily Bache's [translation to Go](https://github.com/emilybache/GildedRose-Refac
 
 ```bash
 $ go get github.com/jamesjoshuahill/gildedrose
+$ cd $GOPATH/src/github.com/jamesjoshuahill/gildedrose
 $ brew install dep
 $ dep ensure
 ```
