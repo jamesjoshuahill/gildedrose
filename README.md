@@ -1,4 +1,4 @@
-# Gilded Rose Kata
+# Gilded Rose
 
 [![Build Status](https://travis-ci.org/jamesjoshuahill/gildedrose.svg?branch=master)](https://travis-ci.org/jamesjoshuahill/gildedrose)
 
