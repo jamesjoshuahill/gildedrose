@@ -1,14 +1,14 @@
 package gildedrose
 
-type GildedRose struct {
+type App struct {
 	Items []Item
 }
 
-func New(items []Item) *GildedRose {
-	return &GildedRose{Items: items}
+func NewApp(items []Item) *App {
+	return &App{Items: items}
 }
 
-func (g *GildedRose) UpdateQuality() {
+func (g *App) UpdateQuality() {
 	for i := 0; i < len(g.Items); i++ {
 
 		if g.Items[i].Name != "Aged Brie" && g.Items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {

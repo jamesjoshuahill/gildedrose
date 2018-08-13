@@ -6,10 +6,10 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Gilded Rose", func() {
+var _ = Describe("App", func() {
 	It("foo", func() {
 		items := []gildedrose.Item{{Name: "foo", SellIn: 0, Quality: 0}}
-		app := gildedrose.New(items)
+		app := gildedrose.NewApp(items)
 
 		app.UpdateQuality()
 
