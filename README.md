@@ -31,7 +31,7 @@ Unfortunately, the tests are failing :worried:
 The [Gilded Rose Requirements](https://github.com/jamesjoshuahill/gildedrose/blob/master/REQUIREMENTS.md) explain what
 the code is for.
 
-The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/GOLDEN_MASTER.txt) records the correct
+The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/main/fixtures/golden_master.txt) records the correct
 output for 30 days. You can confirm there is no diff by running the test provided, or comparing the output:
 
 ```bash
