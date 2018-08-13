@@ -24,7 +24,9 @@ $ go get github.com/onsi/ginkgo/ginkgo
 $ ginkgo -r -p -keepGoing
 ```
 
-Unfortunately, the tests are failing :worried:
+The integration test checks that the output of the program matches the [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/main/fixtures/golden_master.txt).
+
+The unit tests check that every item is updated correctly. There are pending unit tests for Conjured items.
 
 ## Refactor
 
