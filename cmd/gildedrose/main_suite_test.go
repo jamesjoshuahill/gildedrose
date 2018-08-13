@@ -16,9 +16,9 @@ func TestGildedRose(t *testing.T) {
 }
 
 var _ = SynchronizedBeforeSuite(func() []byte {
-	binaryPath, err := gexec.Build("github.com/jamesjoshuahill/gildedrose/cmd/gildedrose")
+	path, err := gexec.Build("github.com/jamesjoshuahill/gildedrose/cmd/gildedrose")
 	Expect(err).NotTo(HaveOccurred())
-	return []byte(binaryPath)
+	return []byte(path)
 }, func(data []byte) {
 	binaryPath = string(data)
 })
