@@ -25,7 +25,7 @@ $ go get github.com/onsi/ginkgo/ginkgo
 $ ginkgo -r -p -keepGoing
 ```
 
-The integration test checks that the output of the program matches the [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/main/fixtures/golden_master.txt).
+The integration test checks that the output of the program matches the [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt).
 
 The unit tests check that every item is updated correctly.
 
@@ -36,7 +36,7 @@ There are pending tests for Conjured items.
 The [Gilded Rose Requirements](https://github.com/jamesjoshuahill/gildedrose/blob/master/REQUIREMENTS.md) explain what
 the code is for.
 
-The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/main/fixtures/golden_master.txt) records the correct
+The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt) records the correct
 output for 30 days. You can confirm there is no diff by running the test provided, or comparing the output:
 
 ```bash
