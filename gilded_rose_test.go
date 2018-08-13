@@ -13,6 +13,6 @@ var _ = Describe("Gilded Rose", func() {
 
 		app.UpdateQuality()
 
-		Expect(items[0].Name).To(Equal("fixme"))
+		Expect(items[0].Name).To(Equal("foo"))
 	})
 })
