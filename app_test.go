@@ -87,6 +87,7 @@ var _ = Describe("App", func() {
 		Entry("6 days before sell by date", 6, initialQuality, initialQuality+2),
 		Entry("5 days before sell by date", 5, initialQuality, initialQuality+3),
 		Entry("1 day before sell by date", 1, initialQuality, initialQuality+3),
+		Entry("1 day before sell by date of quality 50", 1, 50, 50),
 		Entry("on sell by date", 0, initialQuality, 0),
 		Entry("of zero quality", 0, 0, 0),
 	)
