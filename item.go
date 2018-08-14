@@ -2,12 +2,12 @@ package gildedrose
 
 type Item struct {
 	name    string
-	sellIn  *sellIn
-	quality *quality
+	sellIn  int
+	quality int
 	updater updater
 }
 
-func NewItem(name string, sellInValue, qualityValue int) Item {
+func NewItem(name string, sellIn, quality int) *Item {
 	var updater updater
 	switch name {
 	case "Aged Brie":
@@ -22,10 +22,10 @@ func NewItem(name string, sellInValue, qualityValue int) Item {
 		updater = newStandardUpdateFunc(-1, -2)
 	}
 
-	return Item{
+	return &Item{
 		name:    name,
-		sellIn:  &sellIn{value: sellInValue},
-		quality: &quality{value: qualityValue},
+		sellIn:  sellIn,
+		quality: quality,
 		updater: updater,
 	}
 }
@@ -35,13 +35,13 @@ func (b Item) Name() string {
 }
 
 func (b Item) SellIn() int {
-	return b.sellIn.value
+	return b.sellIn
 }
 
 func (b Item) Quality() int {
-	return b.quality.value
+	return b.quality
 }
 
 func (b *Item) UpdateQuality() {
-	b.updater(b.sellIn, b.quality)
+	b.sellIn, b.quality = b.updater(b.sellIn, b.quality)
 }

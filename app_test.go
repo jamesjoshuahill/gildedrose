@@ -10,7 +10,7 @@ var _ = Describe("App", func() {
 	const initialQuality = 10
 
 	It("updates quality of all items", func() {
-		items := []gildedrose.Item{
+		items := []*gildedrose.Item{
 			gildedrose.NewItem("some normal item", 1, initialQuality),
 			gildedrose.NewItem("Aged Brie", 0, initialQuality),
 		}

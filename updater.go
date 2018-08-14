@@ -1,33 +1,55 @@
 package gildedrose
 
-type updater func(*sellIn, *quality)
+const (
+	minQuality = 0
+	maxQuality = 50
+)
 
-func noopUpdateFunc(_ *sellIn, _ *quality) {}
+type updater func(sellIn, quality int) (int, int)
+
+func noopUpdateFunc(sellIn, quality int) (int, int) {
+	return sellIn, quality
+}
 
 func newStandardUpdateFunc(changeInDate, changeOutOfDate int) updater {
-	return func(sellIn *sellIn, quality *quality) {
-		sellIn.decrement()
+	return func(sellIn, quality int) (int, int) {
+		sellIn = sellIn - 1
 
 		change := changeInDate
-		if sellIn.lessThan(0) {
+		if sellIn < 0 {
 			change = changeOutOfDate
 		}
-		quality.update(change)
+
+		return sellIn, normaliseQuality(quality, change)
 	}
 }
 
-func backstagePassUpdateFunc(sellIn *sellIn, quality *quality) {
-	sellIn.decrement()
+func backstagePassUpdateFunc(sellIn, quality int) (int, int) {
+	sellIn = sellIn - 1
 
 	change := 1
-	if sellIn.lessThan(10) {
+	if sellIn < 10 {
 		change = 2
 	}
-	if sellIn.lessThan(5) {
+	if sellIn < 5 {
 		change = 3
 	}
-	if sellIn.lessThan(0) {
+	if sellIn < 0 {
 		change = -maxQuality
 	}
-	quality.update(change)
+
+	return sellIn, normaliseQuality(quality, change)
+}
+
+func normaliseQuality(value, change int) int {
+	q := value + change
+
+	if q < minQuality {
+		q = minQuality
+	}
+	if q > maxQuality {
+		q = maxQuality
+	}
+
+	return q
 }

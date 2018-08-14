@@ -1,10 +1,10 @@
 package gildedrose
 
 type App struct {
-	Items []Item
+	Items []*Item
 }
 
-func NewApp(items []Item) *App {
+func NewApp(items []*Item) *App {
 	return &App{Items: items}
 }
 
