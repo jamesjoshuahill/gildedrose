@@ -3,75 +3,88 @@ package gildedrose_test
 import (
 	"github.com/jamesjoshuahill/gildedrose"
 	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
 )
 
 var _ = Describe("Item", func() {
-	It("creates normal items", func() {
-		item := gildedrose.NewItem("some-name", 1, 2)
+	const initialQuality = 10
 
-		Expect(item.Name()).To(Equal("some-name"))
-		Expect(item.SellIn()).To(Equal(1))
-		Expect(item.Quality()).To(Equal(2))
-	})
+	DescribeTable("normal items update",
+		func(sellIn, quality, expectedQuality int) {
+			item := gildedrose.NewItem("some normal item", sellIn, quality)
 
-	It("creates Sulfuras", func() {
-		item := gildedrose.NewItem("Sulfuras, Hand of Ragnaros", 10, 80)
+			item.UpdateQuality()
 
-		Expect(item.Name()).To(Equal("Sulfuras, Hand of Ragnaros"))
-		Expect(item.SellIn()).To(Equal(10))
-		Expect(item.Quality()).To(Equal(80))
-	})
+			Expect(item.SellIn()).To(Equal(sellIn - 1))
+			Expect(item.Quality()).To(Equal(expectedQuality))
+		},
+		Entry("before sell by date", 1, initialQuality, initialQuality-1),
+		Entry("on sell by date", 0, initialQuality, initialQuality-2),
+		Entry("after sell by date", -1, initialQuality, initialQuality-2),
+		Entry("of zero quality", 1, 0, 0),
+	)
 
-	It("creates AgedBrie", func() {
-		item := gildedrose.NewItem("Aged Brie", 2, 0)
+	DescribeTable("updates quality of aged brie",
+		func(sellIn, quality, expectedQuality int) {
+			item := gildedrose.NewItem("Aged Brie", sellIn, quality)
 
-		Expect(item.Name()).To(Equal("Aged Brie"))
-		Expect(item.SellIn()).To(Equal(2))
-		Expect(item.Quality()).To(Equal(0))
-	})
+			item.UpdateQuality()
 
-	It("creates Backstage Passes", func() {
-		item := gildedrose.NewItem("Backstage passes to a TAFKAL80ETC concert", 15, 20)
+			Expect(item.SellIn()).To(Equal(sellIn - 1))
+			Expect(item.Quality()).To(Equal(expectedQuality))
+		},
+		Entry("before sell by date", 1, initialQuality, initialQuality+1),
+		Entry("on sell by date", 0, initialQuality, initialQuality+2),
+		Entry("after sell by date", -1, initialQuality, initialQuality+2),
+		Entry("of quality 50", 1, 50, 50),
+	)
 
-		Expect(item.Name()).To(Equal("Backstage passes to a TAFKAL80ETC concert"))
-		Expect(item.SellIn()).To(Equal(15))
-		Expect(item.Quality()).To(Equal(20))
-	})
+	DescribeTable("updates quality of sulfuras",
+		func(sellIn, quality, expectedQuality int) {
+			item := gildedrose.NewItem("Sulfuras, Hand of Ragnaros", sellIn, quality)
 
-	It("creates Conjured items", func() {
-		item := gildedrose.NewItem("Conjured Mana Cake", 3, 6)
+			item.UpdateQuality()
 
-		Expect(item.Name()).To(Equal("Conjured Mana Cake"))
-		Expect(item.SellIn()).To(Equal(3))
-		Expect(item.Quality()).To(Equal(6))
-	})
+			Expect(item.SellIn()).To(Equal(sellIn))
+			Expect(item.Quality()).To(Equal(expectedQuality))
+		},
+		Entry("before sell by date", 1, 80, 80),
+		Entry("on sell by date", 0, 80, 80),
+		Entry("after sell by date", -1, 80, 80),
+	)
 
-	Context("when a normal item is updated", func() {
-		It("reduces sell in by one", func() {
-			i := gildedrose.NewItem("", 1, 0)
+	DescribeTable("updates quality of backstage passes",
+		func(sellIn, quality, expectedQuality int) {
+			item := gildedrose.NewItem("Backstage passes to a TAFKAL80ETC concert", sellIn, quality)
 
-			i.UpdateQuality()
+			item.UpdateQuality()
 
-			Expect(i.SellIn()).To(Equal(0))
-		})
-	})
+			Expect(item.SellIn()).To(Equal(sellIn - 1))
+			Expect(item.Quality()).To(Equal(expectedQuality))
+		},
+		Entry("11 days before sell by date", 11, initialQuality, initialQuality+1),
+		Entry("10 days before sell by date", initialQuality, initialQuality, initialQuality+2),
+		Entry("6 days before sell by date", 6, initialQuality, initialQuality+2),
+		Entry("5 days before sell by date", 5, initialQuality, initialQuality+3),
+		Entry("1 day before sell by date", 1, initialQuality, initialQuality+3),
+		Entry("1 day before sell by date of quality 50", 1, 50, 50),
+		Entry("on sell by date", 0, initialQuality, 0),
+		Entry("of zero quality", 0, 0, 0),
+	)
 
-	Context("when Sulfuras is updated", func() {
-		It("does not reduce sell in", func() {
-			i := gildedrose.NewItem("Sulfuras, Hand of Ragnaros", 1, 80)
+	DescribeTable("updates quality of conjured items",
+		func(sellIn, quality, expectedQuality int) {
+			item := gildedrose.NewItem("Conjured Mana Cake", sellIn, quality)
 
-			i.UpdateQuality()
+			item.UpdateQuality()
 
-			Expect(i.SellIn()).To(Equal(1))
-		})
-
-		It("does not reduce in quality", func() {
-			i := gildedrose.NewItem("Sulfuras, Hand of Ragnaros", 1, 80)
-
-			i.UpdateQuality()
-
-			Expect(i.Quality()).To(Equal(80))
-		})
-	})
+			Expect(item.SellIn()).To(Equal(sellIn - 1))
+			Expect(item.Quality()).To(Equal(expectedQuality))
+		},
+		Entry("before sell by date", 1, initialQuality, initialQuality-2),
+		Entry("on sell by date", 0, initialQuality, initialQuality-4),
+		Entry("after sell by date", -1, initialQuality, initialQuality-4),
+		Entry("of zero quality", 1, 0, 0),
+	)
 })
