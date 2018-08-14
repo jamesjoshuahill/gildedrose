@@ -9,7 +9,7 @@ import (
 func main() {
 	fmt.Println("OMGHAI!")
 
-	items := []*gildedrose.Item{
+	items := []gildedrose.Item{
 		gildedrose.NewItem("+5 Dexterity Vest", 10, 20),
 		gildedrose.NewItem("Aged Brie", 2, 0),
 		gildedrose.NewItem("Elixir of the Mongoose", 5, 7),

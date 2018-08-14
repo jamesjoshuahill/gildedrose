@@ -14,10 +14,10 @@ var _ = Describe("Item", func() {
 		func(sellIn, quality, expectedQuality int) {
 			item := gildedrose.NewItem("some normal item", sellIn, quality)
 
-			item.UpdateQuality()
+			updated := item.UpdateQuality()
 
-			Expect(item.SellIn()).To(Equal(sellIn - 1))
-			Expect(item.Quality()).To(Equal(expectedQuality))
+			Expect(updated.SellIn()).To(Equal(sellIn - 1))
+			Expect(updated.Quality()).To(Equal(expectedQuality))
 		},
 		Entry("before sell by date", 1, initialQuality, initialQuality-1),
 		Entry("on sell by date", 0, initialQuality, initialQuality-2),
@@ -29,10 +29,10 @@ var _ = Describe("Item", func() {
 		func(sellIn, quality, expectedQuality int) {
 			item := gildedrose.NewItem("Aged Brie", sellIn, quality)
 
-			item.UpdateQuality()
+			updated := item.UpdateQuality()
 
-			Expect(item.SellIn()).To(Equal(sellIn - 1))
-			Expect(item.Quality()).To(Equal(expectedQuality))
+			Expect(updated.SellIn()).To(Equal(sellIn - 1))
+			Expect(updated.Quality()).To(Equal(expectedQuality))
 		},
 		Entry("before sell by date", 1, initialQuality, initialQuality+1),
 		Entry("on sell by date", 0, initialQuality, initialQuality+2),
@@ -44,10 +44,10 @@ var _ = Describe("Item", func() {
 		func(sellIn, quality, expectedQuality int) {
 			item := gildedrose.NewItem("Sulfuras, Hand of Ragnaros", sellIn, quality)
 
-			item.UpdateQuality()
+			updated := item.UpdateQuality()
 
-			Expect(item.SellIn()).To(Equal(sellIn))
-			Expect(item.Quality()).To(Equal(expectedQuality))
+			Expect(updated.SellIn()).To(Equal(sellIn))
+			Expect(updated.Quality()).To(Equal(expectedQuality))
 		},
 		Entry("before sell by date", 1, 80, 80),
 		Entry("on sell by date", 0, 80, 80),
@@ -58,10 +58,10 @@ var _ = Describe("Item", func() {
 		func(sellIn, quality, expectedQuality int) {
 			item := gildedrose.NewItem("Backstage passes to a TAFKAL80ETC concert", sellIn, quality)
 
-			item.UpdateQuality()
+			updated := item.UpdateQuality()
 
-			Expect(item.SellIn()).To(Equal(sellIn - 1))
-			Expect(item.Quality()).To(Equal(expectedQuality))
+			Expect(updated.SellIn()).To(Equal(sellIn - 1))
+			Expect(updated.Quality()).To(Equal(expectedQuality))
 		},
 		Entry("11 days before sell by date", 11, initialQuality, initialQuality+1),
 		Entry("10 days before sell by date", initialQuality, initialQuality, initialQuality+2),
@@ -77,10 +77,10 @@ var _ = Describe("Item", func() {
 		func(sellIn, quality, expectedQuality int) {
 			item := gildedrose.NewItem("Conjured Mana Cake", sellIn, quality)
 
-			item.UpdateQuality()
+			updated := item.UpdateQuality()
 
-			Expect(item.SellIn()).To(Equal(sellIn - 1))
-			Expect(item.Quality()).To(Equal(expectedQuality))
+			Expect(updated.SellIn()).To(Equal(sellIn - 1))
+			Expect(updated.Quality()).To(Equal(expectedQuality))
 		},
 		Entry("before sell by date", 1, initialQuality, initialQuality-2),
 		Entry("on sell by date", 0, initialQuality, initialQuality-4),

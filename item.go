@@ -7,7 +7,7 @@ type Item struct {
 	updater updater
 }
 
-func NewItem(name string, sellIn, quality int) *Item {
+func NewItem(name string, sellIn, quality int) Item {
 	var updater updater
 	switch name {
 	case "Aged Brie":
@@ -22,7 +22,7 @@ func NewItem(name string, sellIn, quality int) *Item {
 		updater = newStandardUpdateFunc(-1, -2)
 	}
 
-	return &Item{
+	return Item{
 		name:    name,
 		sellIn:  sellIn,
 		quality: quality,
@@ -42,6 +42,7 @@ func (b Item) Quality() int {
 	return b.quality
 }
 
-func (b *Item) UpdateQuality() {
+func (b Item) UpdateQuality() Item {
 	b.sellIn, b.quality = b.updater(b.sellIn, b.quality)
+	return b
 }
