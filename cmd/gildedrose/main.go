@@ -24,13 +24,13 @@ func main() {
 	app := gildedrose.New(items)
 
 	for day := 0; day <= 30; day++ {
-		if day != 0 {
-			fmt.Println()
-		}
 		fmt.Printf("-------- day %d --------\n", day)
 		fmt.Printf("name, sellIn, quality\n")
 		for _, item := range app.Items {
 			fmt.Printf("%s, %d, %d\n", item.Name(), item.SellIn(), item.Quality())
+		}
+		if day < 30 {
+			fmt.Println()
 		}
 		app.UpdateQuality()
 	}
