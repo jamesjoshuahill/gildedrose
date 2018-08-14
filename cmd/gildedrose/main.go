@@ -21,7 +21,7 @@ func main() {
 		gildedrose.NewItem("Conjured Mana Cake", 3, 10),
 	}
 
-	app := gildedrose.New(items)
+	app := gildedrose.NewApp(items)
 
 	for day := 0; day <= 30; day++ {
 		fmt.Printf("-------- day %d --------\n", day)
