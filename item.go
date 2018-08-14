@@ -4,25 +4,30 @@ type Item struct {
 	name    string
 	sellIn  *sellIn
 	quality *quality
-	updater
+	updater updater
 }
 
 func NewItem(name string, sellInValue, qualityValue int) Item {
 	var updater updater
 	switch name {
 	case "Aged Brie":
-		updater = standardUpdater{changeInDate: 1, changeOutOfDate: 2}
+		updater = newStandardUpdateFunc(1, 2)
 	case "Conjured Mana Cake":
-		updater = standardUpdater{changeInDate: -2, changeOutOfDate: -4}
+		updater = newStandardUpdateFunc(-2, -4)
 	case "Backstage passes to a TAFKAL80ETC concert":
-		updater = backstagePassUpdater{}
+		updater = backstagePassUpdateFunc
 	case "Sulfuras, Hand of Ragnaros":
-		updater = noopUpdater{}
+		updater = noopUpdateFunc
 	default:
-		updater = standardUpdater{changeInDate: -1, changeOutOfDate: -2}
+		updater = newStandardUpdateFunc(-1, -2)
 	}
 
-	return Item{name, &sellIn{value: sellInValue}, &quality{value: qualityValue}, updater}
+	return Item{
+		name:    name,
+		sellIn:  &sellIn{value: sellInValue},
+		quality: &quality{value: qualityValue},
+		updater: updater,
+	}
 }
 
 func (b Item) Name() string {
@@ -38,5 +43,5 @@ func (b Item) Quality() int {
 }
 
 func (b *Item) UpdateQuality() {
-	b.update(b.sellIn, b.quality)
+	b.updater(b.sellIn, b.quality)
 }

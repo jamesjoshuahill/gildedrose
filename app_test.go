@@ -18,9 +18,9 @@ var _ = Describe("App", func() {
 
 		app.UpdateQuality()
 
-		Expect(app.Items).To(ConsistOf(
-			gildedrose.NewItem("some normal item", 0, initialQuality-1),
-			gildedrose.NewItem("Aged Brie", -1, initialQuality+2),
-		))
+		Expect(app.Items[0].SellIn()).To(Equal(0))
+		Expect(app.Items[0].Quality()).To(Equal(initialQuality - 1))
+		Expect(app.Items[1].SellIn()).To(Equal(-1))
+		Expect(app.Items[1].Quality()).To(Equal(initialQuality + 2))
 	})
 })

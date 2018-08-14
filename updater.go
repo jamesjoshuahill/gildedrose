@@ -1,30 +1,22 @@
 package gildedrose
 
-type updater interface {
-	update(*sellIn, *quality)
-}
+type updater func(*sellIn, *quality)
 
-type noopUpdater struct{}
+func noopUpdateFunc(_ *sellIn, _ *quality) {}
 
-func (noopUpdater) update(s *sellIn, q *quality) {}
+func newStandardUpdateFunc(changeInDate, changeOutOfDate int) updater {
+	return func(sellIn *sellIn, quality *quality) {
+		sellIn.decrement()
 
-type standardUpdater struct {
-	changeInDate, changeOutOfDate int
-}
-
-func (u standardUpdater) update(sellIn *sellIn, quality *quality) {
-	sellIn.decrement()
-
-	change := u.changeInDate
-	if sellIn.lessThan(0) {
-		change = u.changeOutOfDate
+		change := changeInDate
+		if sellIn.lessThan(0) {
+			change = changeOutOfDate
+		}
+		quality.update(change)
 	}
-	quality.update(change)
 }
 
-type backstagePassUpdater struct{}
-
-func (backstagePassUpdater) update(sellIn *sellIn, quality *quality) {
+func backstagePassUpdateFunc(sellIn *sellIn, quality *quality) {
 	sellIn.decrement()
 
 	change := 1
