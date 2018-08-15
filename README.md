@@ -40,7 +40,7 @@ The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cm
 output for 30 days. You can confirm there is no diff by running the test provided, or comparing the output:
 
 ```bash
-$ diff <(go run cmd/gildedrose/main.go) GOLDEN_MASTER.txt
+$ diff <(go run cmd/gildedrose/main.go) cmd/gildedrose/testdata/golden_master.txt
 ```
 
 The goal of the refactoring is to make it easy to add support for Conjured items.
