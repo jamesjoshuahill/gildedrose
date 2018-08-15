@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func TestInventory(t *testing.T) {
+func TestGildedrose(t *testing.T) {
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "Gilded Rose Suite")
 }
