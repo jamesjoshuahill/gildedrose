@@ -18,9 +18,9 @@ var _ = Describe("App", func() {
 
 		app.UpdateQuality()
 
-		Expect(app.Items[0].SellIn()).To(Equal(0))
-		Expect(app.Items[0].Quality()).To(Equal(initialQuality - 1))
-		Expect(app.Items[1].SellIn()).To(Equal(-1))
-		Expect(app.Items[1].Quality()).To(Equal(initialQuality + 2))
+		Expect(app.Items()[0].SellIn()).To(Equal(0))
+		Expect(app.Items()[0].Quality()).To(Equal(initialQuality - 1))
+		Expect(app.Items()[1].SellIn()).To(Equal(-1))
+		Expect(app.Items()[1].Quality()).To(Equal(initialQuality + 2))
 	})
 })

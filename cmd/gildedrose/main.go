@@ -26,7 +26,7 @@ func main() {
 	for day := 0; day <= 30; day++ {
 		fmt.Printf("-------- day %d --------\n", day)
 		fmt.Printf("name, sellIn, quality\n")
-		for _, item := range app.Items {
+		for _, item := range app.Items() {
 			fmt.Printf("%s, %d, %d\n", item.Name(), item.SellIn(), item.Quality())
 		}
 		if day < 30 {
