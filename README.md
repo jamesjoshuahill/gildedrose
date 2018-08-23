@@ -6,6 +6,20 @@ This is a refactoring kata created in C# by [Terry Hughes](http://twitter.com/Te
 Emily Bache's [translation to Go](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/go). It provides unit tests
 and a functioning binary in `cmd/gildedrose` with integration tests.
 
+## Requirements
+
+The [requirements](https://github.com/jamesjoshuahill/gildedrose/blob/master/REQUIREMENTS.md) explain what
+the code is for.
+
+The [golden master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt) records the correct
+output for 30 days.
+
+You can check the program matches the golden master by running the integration test, or comparing the output:
+
+```bash
+$ diff <(go run cmd/gildedrose/main.go) cmd/gildedrose/testdata/golden_master.txt
+```
+
 ## Get
 
 ```bash
@@ -33,24 +47,10 @@ There are pending tests for Conjured items.
 
 ## Refactor
 
-The [Gilded Rose Requirements](https://github.com/jamesjoshuahill/gildedrose/blob/master/REQUIREMENTS.md) explain what
-the code is for.
-
-The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt) records the correct
-output for 30 days. You can confirm there is no diff by running the integration test provided, or comparing the output:
-
-```bash
-$ diff <(go run cmd/gildedrose/main.go) cmd/gildedrose/testdata/golden_master.txt
-```
-
-The goal of the refactoring is to make it easy to add support for Conjured items.
-
-## Scenarios
-
-There are many ways to approach this exercise. Here are some suggestions:
+There are many ways to use this kata. Here are some suggestions:
 
 1. Refactor the code so that it is easy to extend, then implement Conjured items.
 1. Implement Conjured items with the fewest changes.
 1. Delete all the tests, then write enough tests to allow you to implement Conjured items without breaking the other items.
-1. Delete all the code, then test drive a new implementation.
+1. Delete all the code, then use the tests provided to drive out a new implementation.
 1. New requirement: any item can be conjured and their quality changes twice as fast, e.g. Conjured Aged Brie.
