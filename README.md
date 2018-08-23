@@ -39,18 +39,18 @@ $ go get github.com/onsi/ginkgo/ginkgo
 $ ginkgo -r -p -keepGoing
 ```
 
-The integration test checks that the output of the program matches the [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt).
+The integration test checks that the output of the program matches the [golden master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt).
 
 The unit tests check that every item is updated correctly.
 
-There are pending tests for Conjured items.
+For conjured items there are [pending unit tests](https://github.com/jamesjoshuahill/gildedrose/blob/master/app_test.go#L95-L109) and a [golden master with conjured item](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master_with_conjured_item.txt) for the integration test.
 
 ## Refactor
 
 There are many ways to use this kata. Here are some suggestions:
 
-1. Refactor the code so that it is easy to extend, then implement Conjured items.
-1. Implement Conjured items with the fewest changes.
-1. Delete all the tests, then write enough tests to allow you to implement Conjured items without breaking the other items.
+1. Refactor the code so that it is easy to extend, then implement conjured items.
+1. Implement conjured items with the fewest changes.
+1. Delete all the tests, then write enough tests to allow you to implement conjured items without breaking the other items.
 1. Delete all the code, then use the tests provided to drive out a new implementation.
 1. New requirement: any item can be conjured and their quality changes twice as fast, e.g. Conjured Aged Brie.
