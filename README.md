@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/jamesjoshuahill/gildedrose.svg?branch=master)](https://travis-ci.org/jamesjoshuahill/gildedrose)
 
-This is a refactoring kata created in C# by [Terry Hughes](http://twitter.com/TerryHughes). This version is based on
-Emily Bache's [translation to Go](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/go). It provides unit tests
-and a functioning binary in `cmd/gildedrose` with integration tests.
+This is a refactoring kata created in C# by [Terry Hughes](http://twitter.com/TerryHughes).
+
+This version is based on Emily Bache's [translation to Go](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/go). It provides a test suite and functioning [main.go](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/main.go).
 
 ## Requirements
 
