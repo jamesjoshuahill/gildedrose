@@ -37,10 +37,20 @@ The [Gilded Rose Requirements](https://github.com/jamesjoshuahill/gildedrose/blo
 the code is for.
 
 The [Golden Master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt) records the correct
-output for 30 days. You can confirm there is no diff by running the test provided, or comparing the output:
+output for 30 days. You can confirm there is no diff by running the integration test provided, or comparing the output:
 
 ```bash
 $ diff <(go run cmd/gildedrose/main.go) cmd/gildedrose/testdata/golden_master.txt
 ```
 
 The goal of the refactoring is to make it easy to add support for Conjured items.
+
+## Scenarios
+
+There are many ways to approach this exercise. Here are some suggestions:
+
+1. Refactor the code so that it is easy to extend, then implement Conjured items.
+1. Implement Conjured items with the fewest changes.
+1. Delete all the tests, then write enough tests to allow you to implement Conjured items without breaking the other items.
+1. Delete all the code, then test drive a new implementation.
+1. New requirement: any item can be conjured and their quality changes twice as fast, e.g. Conjured Aged Brie.
