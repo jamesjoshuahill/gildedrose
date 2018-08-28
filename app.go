@@ -44,14 +44,10 @@ func (g *App) UpdateQuality() {
 			continue
 		}
 
-		if g.Items[i].Quality > 0 {
-			g.Items[i].Quality = g.Items[i].Quality - 1
-		}
+		g.Items[i].Quality = decrementQuality(g.Items[i].Quality)
 
 		if g.Items[i].SellIn < 0 {
-			if g.Items[i].Quality > 0 {
-				g.Items[i].Quality = g.Items[i].Quality - 1
-			}
+			g.Items[i].Quality = decrementQuality(g.Items[i].Quality)
 		}
 	}
 }
@@ -59,6 +55,13 @@ func (g *App) UpdateQuality() {
 func incrementQuality(q int) int {
 	if q < 50 {
 		return q + 1
+	}
+	return q
+}
+
+func decrementQuality(q int) int {
+	if q > 0 {
+		return q - 1
 	}
 	return q
 }
