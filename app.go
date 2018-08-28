@@ -14,7 +14,21 @@ func (g *App) UpdateQuality() {
 			continue
 		}
 
-		if g.Items[i].Name != "Aged Brie" && g.Items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
+		if g.Items[i].Name == "Aged Brie" {
+			g.Items[i].SellIn = g.Items[i].SellIn - 1
+
+			if g.Items[i].Quality < 50 {
+				g.Items[i].Quality = g.Items[i].Quality + 1
+			}
+
+			if g.Items[i].SellIn < 0 && g.Items[i].Quality < 50 {
+				g.Items[i].Quality = g.Items[i].Quality + 1
+			}
+
+			continue
+		}
+
+		if g.Items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
 			if g.Items[i].Quality > 0 {
 				g.Items[i].Quality = g.Items[i].Quality - 1
 			}
@@ -39,18 +53,12 @@ func (g *App) UpdateQuality() {
 		g.Items[i].SellIn = g.Items[i].SellIn - 1
 
 		if g.Items[i].SellIn < 0 {
-			if g.Items[i].Name != "Aged Brie" {
-				if g.Items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
-					if g.Items[i].Quality > 0 {
-						g.Items[i].Quality = g.Items[i].Quality - 1
-					}
-				} else {
-					g.Items[i].Quality = g.Items[i].Quality - g.Items[i].Quality
+			if g.Items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
+				if g.Items[i].Quality > 0 {
+					g.Items[i].Quality = g.Items[i].Quality - 1
 				}
 			} else {
-				if g.Items[i].Quality < 50 {
-					g.Items[i].Quality = g.Items[i].Quality + 1
-				}
+				g.Items[i].Quality = g.Items[i].Quality - g.Items[i].Quality
 			}
 		}
 	}
