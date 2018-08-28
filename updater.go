@@ -1,53 +1,53 @@
 package gildedrose
 
-type updater func(item Item) Item
+type updater func(sellIn, quality int) (int, int)
 
-func updateAgedBrie(item Item) Item {
-	item.SellIn--
+func updateAgedBrie(sellIn, quality int) (int, int) {
+	sellIn--
 
-	item.Quality = incrementQuality(item.Quality)
+	quality = incrementQuality(quality)
 
-	if item.SellIn < 0 {
-		item.Quality = incrementQuality(item.Quality)
+	if sellIn < 0 {
+		quality = incrementQuality(quality)
 	}
 
-	return item
+	return sellIn, quality
 }
 
-func updateBackstagePasses(item Item) Item {
-	item.SellIn--
+func updateBackstagePasses(sellIn, quality int) (int, int) {
+	sellIn--
 
-	item.Quality = incrementQuality(item.Quality)
+	quality = incrementQuality(quality)
 
-	if item.SellIn < 10 {
-		item.Quality = incrementQuality(item.Quality)
+	if sellIn < 10 {
+		quality = incrementQuality(quality)
 	}
 
-	if item.SellIn < 5 {
-		item.Quality = incrementQuality(item.Quality)
+	if sellIn < 5 {
+		quality = incrementQuality(quality)
 	}
 
-	if item.SellIn < 0 {
-		item.Quality = 0
+	if sellIn < 0 {
+		quality = 0
 	}
 
-	return item
+	return sellIn, quality
 }
 
-func updateNormal(item Item) Item {
-	item.SellIn--
+func updateNormal(sellIn, quality int) (int, int) {
+	sellIn--
 
-	item.Quality = decrementQuality(item.Quality)
+	quality = decrementQuality(quality)
 
-	if item.SellIn < 0 {
-		item.Quality = decrementQuality(item.Quality)
+	if sellIn < 0 {
+		quality = decrementQuality(quality)
 	}
 
-	return item
+	return sellIn, quality
 }
 
-func updateSulfuras(item Item) Item {
-	return item
+func updateSulfuras(sellIn, quality int) (int, int) {
+	return sellIn, quality
 }
 
 func incrementQuality(q int) int {

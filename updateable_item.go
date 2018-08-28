@@ -19,5 +19,6 @@ func newUpdateableItem(item Item) updateableItem {
 }
 
 func (u updateableItem) Update() Item {
-	return u.updater(u.Item)
+	u.SellIn, u.Quality = u.updater(u.SellIn, u.Quality)
+	return u.Item
 }
