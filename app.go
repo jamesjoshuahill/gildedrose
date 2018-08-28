@@ -16,40 +16,53 @@ func (g *App) UpdateQuality() {
 
 		g.Items[i].SellIn = g.Items[i].SellIn - 1
 
-		if g.Items[i].Name == "Aged Brie" {
-			g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
-
-			if g.Items[i].SellIn < 0 {
-				g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
-			}
-
-			continue
-		}
-
-		if g.Items[i].Name == "Backstage passes to a TAFKAL80ETC concert" {
-			g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
-
-			if g.Items[i].SellIn < 10 {
-				g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
-			}
-
-			if g.Items[i].SellIn < 5 {
-				g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
-			}
-
-			if g.Items[i].SellIn < 0 {
-				g.Items[i].Quality = g.Items[i].Quality - g.Items[i].Quality
-			}
-
-			continue
-		}
-
-		g.Items[i].Quality = decrementQuality(g.Items[i].Quality)
-
-		if g.Items[i].SellIn < 0 {
-			g.Items[i].Quality = decrementQuality(g.Items[i].Quality)
+		switch g.Items[i].Name {
+		case "Aged Brie":
+			g.Items[i] = updateAgedBrie(g.Items[i])
+		case "Backstage passes to a TAFKAL80ETC concert":
+			g.Items[i] = updateBackstagePasses(g.Items[i])
+		default:
+			g.Items[i] = updateNormal(g.Items[i])
 		}
 	}
+}
+
+func updateAgedBrie(item Item) Item {
+	item.Quality = incrementQuality(item.Quality)
+
+	if item.SellIn < 0 {
+		item.Quality = incrementQuality(item.Quality)
+	}
+
+	return item
+}
+
+func updateBackstagePasses(item Item) Item {
+	item.Quality = incrementQuality(item.Quality)
+
+	if item.SellIn < 10 {
+		item.Quality = incrementQuality(item.Quality)
+	}
+
+	if item.SellIn < 5 {
+		item.Quality = incrementQuality(item.Quality)
+	}
+
+	if item.SellIn < 0 {
+		item.Quality = 0
+	}
+
+	return item
+}
+
+func updateNormal(item Item) Item {
+	item.Quality = decrementQuality(item.Quality)
+
+	if item.SellIn < 0 {
+		item.Quality = decrementQuality(item.Quality)
+	}
+
+	return item
 }
 
 func incrementQuality(q int) int {
