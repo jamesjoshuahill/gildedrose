@@ -10,17 +10,13 @@ func NewApp(items []Item) *App {
 
 func (g *App) UpdateQuality() {
 	for i := 0; i < len(g.Items); i++ {
-		if g.Items[i].Name == "Sulfuras, Hand of Ragnaros" {
-			continue
-		}
-
-		g.Items[i].SellIn = g.Items[i].SellIn - 1
-
 		switch g.Items[i].Name {
 		case "Aged Brie":
 			g.Items[i] = updateAgedBrie(g.Items[i])
 		case "Backstage passes to a TAFKAL80ETC concert":
 			g.Items[i] = updateBackstagePasses(g.Items[i])
+		case "Sulfuras, Hand of Ragnaros":
+			g.Items[i] = updateSulfuras(g.Items[i])
 		default:
 			g.Items[i] = updateNormal(g.Items[i])
 		}
@@ -28,6 +24,8 @@ func (g *App) UpdateQuality() {
 }
 
 func updateAgedBrie(item Item) Item {
+	item.SellIn--
+
 	item.Quality = incrementQuality(item.Quality)
 
 	if item.SellIn < 0 {
@@ -38,6 +36,8 @@ func updateAgedBrie(item Item) Item {
 }
 
 func updateBackstagePasses(item Item) Item {
+	item.SellIn--
+
 	item.Quality = incrementQuality(item.Quality)
 
 	if item.SellIn < 10 {
@@ -56,12 +56,18 @@ func updateBackstagePasses(item Item) Item {
 }
 
 func updateNormal(item Item) Item {
+	item.SellIn--
+
 	item.Quality = decrementQuality(item.Quality)
 
 	if item.SellIn < 0 {
 		item.Quality = decrementQuality(item.Quality)
 	}
 
+	return item
+}
+
+func updateSulfuras(item Item) Item {
 	return item
 }
 
