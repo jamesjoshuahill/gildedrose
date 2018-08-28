@@ -19,21 +19,18 @@ func newStandardUpdater(changeBeforeSellBy, changeAfterSellBy int) updater {
 func backstagePassesUpdater(sellIn, quality int) (int, int) {
 	sellIn--
 
-	quality = changeQuality(quality, 1)
-
+	change := 1
 	if sellIn < 10 {
-		quality = changeQuality(quality, 1)
+		change = 2
 	}
-
 	if sellIn < 5 {
-		quality = changeQuality(quality, 1)
+		change = 3
 	}
-
 	if sellIn < 0 {
-		quality = 0
+		change = -quality
 	}
 
-	return sellIn, quality
+	return sellIn, changeQuality(quality, change)
 }
 
 func noopUpdater(sellIn, quality int) (int, int) {
