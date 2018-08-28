@@ -20,7 +20,7 @@ func NewUpdateableItem(item Item) updateableItem {
 	}
 }
 
-func (u updateableItem) Update() Item {
+func (u updateableItem) Update() updateableItem {
 	u.SellIn, u.Quality = u.updater(u.SellIn, u.Quality)
-	return u.Item
+	return u
 }
