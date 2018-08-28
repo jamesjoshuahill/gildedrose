@@ -16,7 +16,7 @@ func newStandardUpdater(changeBeforeSellBy, changeAfterSellBy int) updater {
 	}
 }
 
-func updateBackstagePasses(sellIn, quality int) (int, int) {
+func backstagePassesUpdater(sellIn, quality int) (int, int) {
 	sellIn--
 
 	quality = changeQuality(quality, 1)
@@ -36,7 +36,7 @@ func updateBackstagePasses(sellIn, quality int) (int, int) {
 	return sellIn, quality
 }
 
-func updateSulfuras(sellIn, quality int) (int, int) {
+func noopUpdater(sellIn, quality int) (int, int) {
 	return sellIn, quality
 }
 
