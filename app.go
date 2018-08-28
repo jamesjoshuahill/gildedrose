@@ -17,32 +17,24 @@ func (g *App) UpdateQuality() {
 		g.Items[i].SellIn = g.Items[i].SellIn - 1
 
 		if g.Items[i].Name == "Aged Brie" {
-			if g.Items[i].Quality < 50 {
-				g.Items[i].Quality = g.Items[i].Quality + 1
-			}
+			g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
 
-			if g.Items[i].SellIn < 0 && g.Items[i].Quality < 50 {
-				g.Items[i].Quality = g.Items[i].Quality + 1
+			if g.Items[i].SellIn < 0 {
+				g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
 			}
 
 			continue
 		}
 
 		if g.Items[i].Name == "Backstage passes to a TAFKAL80ETC concert" {
-			if g.Items[i].Quality < 50 {
-				g.Items[i].Quality = g.Items[i].Quality + 1
+			g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
 
-				if g.Items[i].SellIn < 10 {
-					if g.Items[i].Quality < 50 {
-						g.Items[i].Quality = g.Items[i].Quality + 1
-					}
-				}
+			if g.Items[i].SellIn < 10 {
+				g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
+			}
 
-				if g.Items[i].SellIn < 5 {
-					if g.Items[i].Quality < 50 {
-						g.Items[i].Quality = g.Items[i].Quality + 1
-					}
-				}
+			if g.Items[i].SellIn < 5 {
+				g.Items[i].Quality = incrementQuality(g.Items[i].Quality)
 			}
 
 			if g.Items[i].SellIn < 0 {
@@ -62,4 +54,11 @@ func (g *App) UpdateQuality() {
 			}
 		}
 	}
+}
+
+func incrementQuality(q int) int {
+	if q < 50 {
+		return q + 1
+	}
+	return q
 }
