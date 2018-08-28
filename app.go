@@ -10,6 +10,6 @@ func NewApp(items []Item) *App {
 
 func (g *App) UpdateQuality() {
 	for i := 0; i < len(g.Items); i++ {
-		g.Items[i] = newUpdateableItem(g.Items[i]).Update()
+		g.Items[i] = NewUpdateableItem(g.Items[i]).Update()
 	}
 }

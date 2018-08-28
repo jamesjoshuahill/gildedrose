@@ -5,7 +5,7 @@ type updateableItem struct {
 	updater
 }
 
-func newUpdateableItem(item Item) updateableItem {
+func NewUpdateableItem(item Item) updateableItem {
 	switch item.Name {
 	case "Aged Brie":
 		return updateableItem{Item: item, updater: updateAgedBrie}
