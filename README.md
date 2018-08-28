@@ -4,17 +4,19 @@
 
 This is a refactoring kata created in C# by [Terry Hughes](http://twitter.com/TerryHughes).
 
-This version is based on Emily Bache's [translation to Go](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/go). It provides a test suite and functioning [main.go](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/main.go).
+This version is based on Emily Bache's
+[translation to Go](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/master/go). It provides a test suite
+and functioning [main.go](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/main.go).
 
 ## Requirements
 
 The [requirements](https://github.com/jamesjoshuahill/gildedrose/blob/master/REQUIREMENTS.md) explain what
 the code is for.
 
-The [golden master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt) records the correct
-output for 30 days.
+The [golden master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt)
+records the correct output for 30 days.
 
-You can check the program matches the golden master by running the integration test, or comparing the output:
+You can check the program meets the requirements by comparing its output with the golden master:
 
 ```bash
 $ diff <(go run cmd/gildedrose/main.go) cmd/gildedrose/testdata/golden_master.txt
@@ -31,19 +33,24 @@ $ dep ensure
 
 ## Test
 
-The test suite uses [Ginkgo](https://onsi.github.io/ginkgo/) and [Gomega](https://onsi.github.io/gomega/) and can be run with `go test`, or using the `ginkgo` CLI:
+The test suite uses [Ginkgo](https://onsi.github.io/ginkgo/) and [Gomega](https://onsi.github.io/gomega/) and can be run
+with `go test`, or using the `ginkgo` CLI:
 
 ```bash
 $ cd $GOPATH/src/github.com/jamesjoshuahill/gildedrose
 $ go get github.com/onsi/ginkgo/ginkgo
-$ ginkgo -r -p -keepGoing
+$ ginkgo -r -p
 ```
 
-The integration test checks that the output of the program matches the [golden master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt).
+The integration test expects the program's output to match the
+[golden master](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master.txt).
 
-The unit tests check that every item is updated correctly.
+The unit tests check that every item updates correctly.
 
-For conjured items there are [pending unit tests](https://github.com/jamesjoshuahill/gildedrose/blob/master/app_test.go#L95-L109) and a [golden master with conjured item](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master_with_conjured_item.txt) for the integration test.
+For conjured items there are
+[pending unit tests](https://github.com/jamesjoshuahill/gildedrose/blob/master/app_test.go#L95-L109) and a
+[golden master with conjured item](https://github.com/jamesjoshuahill/gildedrose/blob/master/cmd/gildedrose/testdata/golden_master_with_conjured_item.txt)
+ready to use in the integration test.
 
 ## Refactor
 
