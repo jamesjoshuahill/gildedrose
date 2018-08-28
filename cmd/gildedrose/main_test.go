@@ -13,8 +13,7 @@ import (
 
 var _ = Describe("Gilded Rose", func() {
 	It("updates all items correctly", func() {
-		expectedOutput := readTestData("golden_master.txt")
-		// expectedOutput := readTestData("golden_master_with_conjured_item.txt")
+		expectedOutput := readTestData("golden_master_with_conjured_item.txt")
 
 		session, err := gexec.Start(exec.Command(binaryPath), GinkgoWriter, GinkgoWriter)
 

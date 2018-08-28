@@ -1,5 +1,7 @@
 package gildedrose
 
+import "strings"
+
 type App struct {
 	Items []Item
 }
@@ -15,6 +17,10 @@ func (g *App) UpdateQuality() {
 			if g.Items[i].Quality > 0 {
 				if g.Items[i].Name != "Sulfuras, Hand of Ragnaros" {
 					g.Items[i].Quality = g.Items[i].Quality - 1
+
+					if strings.HasPrefix(g.Items[i].Name, "Conjured") && g.Items[i].Quality > 0 {
+						g.Items[i].Quality = g.Items[i].Quality - 1
+					}
 				}
 			}
 		} else {
@@ -45,6 +51,10 @@ func (g *App) UpdateQuality() {
 					if g.Items[i].Quality > 0 {
 						if g.Items[i].Name != "Sulfuras, Hand of Ragnaros" {
 							g.Items[i].Quality = g.Items[i].Quality - 1
+
+							if strings.HasPrefix(g.Items[i].Name, "Conjured") && g.Items[i].Quality > 0 {
+								g.Items[i].Quality = g.Items[i].Quality - 1
+							}
 						}
 					}
 				} else {

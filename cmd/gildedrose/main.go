@@ -18,7 +18,7 @@ func main() {
 		{Name: "Backstage passes to a TAFKAL80ETC concert", SellIn: 15, Quality: 20},
 		{Name: "Backstage passes to a TAFKAL80ETC concert", SellIn: 10, Quality: 49},
 		{Name: "Backstage passes to a TAFKAL80ETC concert", SellIn: 5, Quality: 49},
-		//{Name: "Conjured Mana Cake", SellIn: 3, Quality: 10},
+		{Name: "Conjured Mana Cake", SellIn: 3, Quality: 10},
 	}
 
 	app := gildedrose.NewApp(items)
