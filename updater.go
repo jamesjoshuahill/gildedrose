@@ -34,6 +34,18 @@ func updateBackstagePasses(sellIn, quality int) (int, int) {
 	return sellIn, quality
 }
 
+func updateConjured(sellIn, quality int) (int, int) {
+	sellIn--
+
+	quality = decrementQuality(decrementQuality(quality))
+
+	if sellIn < 0 {
+		quality = decrementQuality(decrementQuality(quality))
+	}
+
+	return sellIn, quality
+}
+
 func updateNormal(sellIn, quality int) (int, int) {
 	sellIn--
 

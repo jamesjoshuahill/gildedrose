@@ -92,7 +92,7 @@ var _ = Describe("App", func() {
 		Entry("of zero quality", 0, 0, 0),
 	)
 
-	PDescribeTable("updates quality of conjured items",
+	DescribeTable("updates quality of conjured items",
 		func(sellIn, quality, expectedQuality int) {
 			items := []gildedrose.Item{{Name: "Conjured Mana Cake", SellIn: sellIn, Quality: quality}}
 			app := gildedrose.NewApp(items)
