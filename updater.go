@@ -2,16 +2,18 @@ package gildedrose
 
 type updater func(sellIn, quality int) (int, int)
 
-func updateAgedBrie(sellIn, quality int) (int, int) {
-	sellIn--
+func newStandardUpdater(changeBeforeSellBy, changeAfterSellBy int) updater {
+	return func(sellIn, quality int) (int, int) {
+		sellIn--
 
-	quality = changeQuality(quality, 1)
+		change := changeBeforeSellBy
 
-	if sellIn < 0 {
-		quality = changeQuality(quality, 1)
+		if sellIn < 0 {
+			change = changeAfterSellBy
+		}
+
+		return sellIn, changeQuality(quality, change)
 	}
-
-	return sellIn, quality
 }
 
 func updateBackstagePasses(sellIn, quality int) (int, int) {
@@ -29,30 +31,6 @@ func updateBackstagePasses(sellIn, quality int) (int, int) {
 
 	if sellIn < 0 {
 		quality = 0
-	}
-
-	return sellIn, quality
-}
-
-func updateConjured(sellIn, quality int) (int, int) {
-	sellIn--
-
-	quality = changeQuality(quality, -2)
-
-	if sellIn < 0 {
-		quality = changeQuality(quality, -2)
-	}
-
-	return sellIn, quality
-}
-
-func updateNormal(sellIn, quality int) (int, int) {
-	sellIn--
-
-	quality = changeQuality(quality, -1)
-
-	if sellIn < 0 {
-		quality = changeQuality(quality, -1)
 	}
 
 	return sellIn, quality
