@@ -56,8 +56,8 @@ ready to use in the integration test.
 
 There are many ways to use this kata. Here are some suggestions:
 
-1. Refactor the code so that it is easy to extend, then implement conjured items.
 1. Implement conjured items with the fewest changes.
+1. Refactor the code so that it is easy to extend, then implement conjured items.
 1. Delete all the tests, then write enough tests to allow you to implement conjured items without breaking the other items.
 1. Delete all the code, then use the tests provided to drive out a new implementation.
 1. New requirement: any item can be conjured and their quality changes twice as fast, e.g. Conjured Aged Brie.
