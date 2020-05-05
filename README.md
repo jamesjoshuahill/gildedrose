@@ -37,7 +37,7 @@ with using the `ginkgo` CLI:
 
 ```bash
 go install github.com/onsi/ginkgo/ginkgo
-ginkgo -r -p
+ginkgo -r
 ```
 
 or:
