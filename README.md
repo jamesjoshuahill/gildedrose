@@ -24,22 +24,26 @@ $ diff <(go run cmd/gildedrose/main.go) cmd/gildedrose/testdata/golden_master.tx
 
 ## Get
 
+_This module requires Go 1.14._
+
 ```bash
-$ go get github.com/jamesjoshuahill/gildedrose
-$ cd $GOPATH/src/github.com/jamesjoshuahill/gildedrose
-$ brew install dep
-$ dep ensure
+git clone https://github.com/jamesjoshuahill/gildedrose.git
 ```
 
 ## Test
 
 The test suite uses [Ginkgo](https://onsi.github.io/ginkgo/) and [Gomega](https://onsi.github.io/gomega/) and can be run
-with `go test`, or using the `ginkgo` CLI:
+with using the `ginkgo` CLI:
 
 ```bash
-$ cd $GOPATH/src/github.com/jamesjoshuahill/gildedrose
-$ go get github.com/onsi/ginkgo/ginkgo
-$ ginkgo -r -p
+go install github.com/onsi/ginkgo/ginkgo
+ginkgo -r
+```
+
+or:
+
+```bash
+go test ./...
 ```
 
 The integration test expects the program's output to match the
